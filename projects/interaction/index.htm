@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Synthetic Interaction</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="CSS/simple.css" rel="stylesheet" type="text/css">
+  <link href="../CSS/simple.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Synthetic interaction</h1>
+
+<p>We are exploring the creation of synthetic agents with human-like reactive
+behaviours. Such agents have little or no cognitive capacity, but could in
+future provide the 'look-and-feel' of a truly intelligent agent. </p>
+
+<p>The idea is to learn a stochastic dynamical model of interactive behaviour
+from the joint motions of individuals observed with a video camera. A synthetic
+interactive partner is created by prediction from the model and the current
+history at each timestep.</p>
+
+<p>In our first experiments, two individuals shaking hands were observed in
+side view. A contour was extracted automatically from each profile, and the
+joint variation of these contours was modelled using a leaky neural network.
+The following <a href="handshake.mov">movie(3.7MB)</a> shows a
+typical synthetic handshake.</p>
+
+<p align="center"><a href="handshake.mov"><img src="handshake.jpg" width="283"
+height="213" border="0"></a></p>
+
+<p>Details of this prototype are contained in:</p>
+
+<blockquote>
+  <p>Johnson, N., A. Galata, D. Hogg (1998). The Acquisition and Use of
+  Interaction Behaviour Models. IEEE Computer Vision and Pattern Recognition
+  (CVPR'98), Santa Barbara, IEEE Computer Society Press. <a
+  href="http://www.comp.leeds.ac.uk/dch/papers/neilj/cvpr98.pdf">pdf</a></p>
+</blockquote>
+
+<p>A more general overview of interaction modelling is contained in:</p>
+
+<blockquote>
+  <p>Hogg, D. C., N. Johnson, et al. (1998). Visual Models of Interaction. 2nd
+  International Workshop on Cooperative Distributed Vision, Kyoto, Japan. <a
+  href="http://www.comp.leeds.ac.uk/dch/papers/japan.pdf">pdf</a></p>
+</blockquote>
+
+<p>In more recent work, we have modelled the joint 'trajectories' of facial
+expressions using leaky neural networks and hidden markov models. Faces are
+tracked using a deformable appearance model, based on work at Manchester
+University. This type of model may be used for animation as well as visual
+tracking - an essential property for our purposes. This <a
+href="source.mpg">movie(5.3MB)</a> shows a typical training sequence of someone
+speaking and another person listening - the aim is to synthesise the listener
+given only the speaker.</p>
+
+<p align="center"><a href="source.mpg"><img src="source.jpg" width="283"
+height="213" border="0"></a></p>
+
+<p>The first step in learning is to track the individual faces in the source
+video, producing a stream of configuration vectors. The next <a
+href="fit.mpg">movie(8.7MB)</a> illustrates this output by shape
+contours superimposed on each face and by colour facial reconstructions inset
+into the original sequence.</p>
+
+<p align="center"><a href="fit.mpg"><img src="fit.jpg" width="283" height="213"
+border="0"></a></p>
+
+<p>The final <a href="interaction.mpg">movie(5.1MB)</a> shows a synthetic
+listener reacting to the speaker depicted on the right. In these preliminary
+results, the speaker is taken from the same sequence used in training. This
+behaviour was predicted from a learnt HMM with 20 states. The HMM is
+constrained to diagonal covariances and is initialised with full
+connectivity.</p>
+
+<p align="center"><a href="interaction.mpg"><img src="interaction.jpg"
+width="283" height="213" border="0"></a></p>
+
+<p>Such models may one day reveal previously unknown patterns of interactive
+behaviour and shed new light on underlying mechanisms. Our current research is
+harnessing models of facial expression in human-human interaction for the
+synthesis of a realistic computer-based persona, aimed at improving the
+human-computer interface. There are many other exciting and un-tried
+applications for this technology that we wish to explore. For example, detailed
+models of normal patterns of interaction may be used to make sense of CCTV
+within security and safety applications, and to synthesise realistic
+interactions between individuals within an animation.</p>
+
+<p>For more information, contact <a href="https://comp.leeds.ac.uk/dch/index.htm">David Hogg</a></p>
+
+<p><font size="-3">Maintained by David Hogg<br>
+Last updated: 19 July, 2003</font><br>
+</p>
+
+<p> </p>
+
+<p> </p>
+</body>
+</html>
