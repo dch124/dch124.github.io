@@ -1,0 +1,338 @@
+<HTML>
+
+<HEAD>
+<title>Leeds Hand Tracker Demo</title>
+<!-- Changed by: T Heap (CoMIR),  10-Oct-1995 -->
+
+<HR>
+</HEAD>
+
+<BODY>
+<img align=right alt="(University of Leeds Logo)" src="Images/leedslogo.gif" width=108 height=114>
+
+<H1>Leeds Hand Tracker Demo</H1><P>
+
+<h3> <IMG SRC="http://www.comp.leeds.ac.uk/paulf-cgi/Count.cgi?pad=0&df=ajh_index.dat&ft=3&dd=B"> hits since 21st May 1996</h3>
+
+<p>
+
+<blink>New Version 2.1 (29/10/96) features improved mouse controller - button
+clicks are now possible!!!!!!</blink>
+
+<p>
+<HR>
+<p>
+
+<h2>Overview</h2>
+
+The Leeds Hand Tracker was developed by <a href="/~ajh">Tony
+Heap</a>. An unmarked human hand can be tracked from a single colour
+video camera connected to a suitable workstation. An uncluttered
+background is not necessary and the tracker can be trained
+specifically to one hand colour to improve performance. The current
+version of the tracker is limited to being able to track a hand held
+palm out with all fingers showing. We are currently developing a more
+sophisticated version in which full unrestricted movement is possible.
+<p>
+
+At the heart of the system is a deformable outline model of the hand,
+which has been constructed from a number of examples of hands in
+different positions. The hand is tracked from frame to frame using a
+non-trivial edge detection technique to drive the model towards the
+hand in the image. Full technical details can be found in
+<a href="ftp://ftp.cam-orl.co.uk/pub/docs/ORL/tr.95.1.ps.Z">Olivetti
+Research Limited Tech Report 95.1</a>. Here's a snapshot of the
+tracker in action...<p>
+
+<center>
+<IMG SRC="Images/tracker.gif"><p>
+...and you can click <a href="Movies/tracker.mpg">here</a> for a video
+clip (100Kb MPEG).<p>
+</center><p>
+
+<h2>Try it out...</h2>
+
+If you have a Silicon Graphics Indy(TM) running Irix 5.3 or later, you
+can try the hand tracker out for yourself.
+<p>
+
+<h2>Downloading</h2>
+
+You can download <a href="Code/HandTrackerV2.1.tar.Z">
+<tt>HandTrackerV2.1.tar.Z</tt></a> onto your host machine (350Kb).
+To unarchive it, type:<p>
+
+<pre>
+uncompress HandTrackerV2.1.tar.Z
+tar -xf HandTrackerV2.1.tar
+</pre>
+
+This generates the <tt>handtracker</tt> directory with everything you
+need in it.
+
+<h2>Instructions for use</h2>
+
+Before running the demo, you should check that the IndyCam is set up
+properly. Type <tt>vcp</tt>
+to load the video control panel, and check that the default input is
+`IndyCam' and not `Analog Source'. Select `Live Video Input' from the
+`Utilities' menu to check that a signal is coming through. Quit the
+live video input before running the tracker demo.
+
+To run the tracker demo, type this:
+
+<pre>
+cd handtracker/demo
+tracker
+</pre>
+
+This should bring up a window with the view from the IndyCam in it
+(reversed so it acts like a mirror). There is a hand template in the
+middle of the view. If you move your right hand up to the template it
+should `lock on' to your hand and follow it around from there. The
+tracker can only track your hand so long as the palm and all fingers
+are showing. If it thinks it has lost your hand it resets to the
+central position. If it's stuck on the wrong part of your hand, remove
+your hand from view and it will reset.
+
+<h2>Filename Problems</h2>
+
+If you get an error like <tt>load_linear_mean: Can't open
+   "../models/hand-lin.mean" for reading</tt>, then the tracker
+can't find the hand model - you need to use the <tt>-m</tt>
+   switch to tell it where the model files (<tt>hand-lin.*</tt>) are, eg.
+
+<pre>
+tracker -m ./hand-lin L
+</pre>
+
+The <tt>L</tt> is necessary, but don't worry about its meaning!
+
+<a name="lighting"><h2>Lighting conditions</h2></a>
+
+The tracker's performance can be improved by adjusting the colour
+filtering to suit your particular lighting conditions. To check the
+colour filtering, run the tracker in training mode:
+
+<pre>
+tracker -train
+</pre>
+
+Along with the normal view there will be a smaller filter window,
+showing the image after colour filtering. It should look something
+like this:<p>
+
+<center>
+<img src="Images/goodfilter.gif">
+</center>
+<p>
+
+There is good definition of the hand and it should track well. If it
+looks like either of these:<p>
+
+<center>
+<img src="Images/toowhitefilter.gif">
+<img src="Images/toodarkfilter.gif">
+</center>
+<p>
+
+then it might be worth altering the colour filtering. The tracker has
+an auto-train facility for this. Hold your hand up to the IndyCam so
+that the whole of the small square is filled with hand-coloured
+pixels. Then (with your other hand) click the left mouse button. The
+pixels are sampled and a colour histogram is built. The new filter is
+then used in the filter window. You can take more samples by repeating
+this process. To clear the histogram and start again, click the middle
+button. When (if) you're happy, click the right mouse button to save
+the histogram (the filename used is <tt>tracker.hist</tt>).<p>
+
+To use your trained colour filter, type:
+
+<pre>
+tracker -hist &lthistogram filename&gt
+</pre>
+
+Performance of the auto-trainer is sometimes marred by poor lighting
+or by the relatively low quality
+of the IndyCam. If you can't get good results by auto-training, you
+can manually alter the red/green/blue components of the colour filter
+to make it respond bettor to your skin tones. Try:
+
+<pre>
+tracker -train -f &ltr&gt &ltg&gt &ltb&gt
+</pre>
+
+Where R, G and B are the three colour
+filter values (used additively, so the filtered greyscale value for a
+pixel with colour components r, g and b is r*R + g*G + b*B).
+The defaults are 4.0, -2.0 and -2.0 respectively which
+has the effect of highlighting red but damping white.<p>
+
+If you're still having problems there are two other measures. Firstly,
+find a source of ambient light (such as an anglepoise lamp) and
+position it to illuminate your hand. Secondly, go to a hardware store
+and buy some bright yellow rubber gloves. Then use the auto-trainer to
+respond to them. If this doesn't work, I don't know what will!
+
+
+<h2>Command line options</h2>
+
+When you run the tracker you can alter its behaviour with one or more
+command line switches:<p>
+
+<tt>-m &ltmodel base filename&gt &ltmodel type L/P/H&gt</tt> is to specify
+the hand model filename. The only model available at the moment is
+<tt>hand-lin</tt> so there ain't much choice, but you can include the
+full or relative pathname if yours is different to
+<tt>../models/hand-lin</tt>.
+<p>
+
+<tt>-v &ltnumber of variation modes&gt</tt> specifies the number of
+degrees of freedom in the variation of the mand model. The default is
+4. Decrease to 3, 2, 1 or 0 for slight speed increase coupled with
+less robustness.
+<p>
+
+<tt>-i &ltnumber of iterations&gt</tt> is the number of tracking
+iterations per frame. There is a speed/performance tradeoff. Default
+is 4.
+<p>
+
+<tt>-step &ltvalue&gt</tt> alters the tracker sensitivity ie. how far
+the model can move per iteration. There is a tradeoff between speed
+and stability. Default is 1.0.
+<p>
+
+<tt>-rotate <angle in degrees></tt> alters the initial orientation of
+the hand template. -90 degrees is upright.
+<p>
+
+<tt>-lefthand</tt> reverses the hand template for left handed use.
+<p>
+
+<tt>-overhead</tt> configures the tracker for use with an overhead
+camera pointing down onto a desktop.
+<p>
+
+<tt>-mouse</tt> puts the tracker in mouse pointer control mode. See <a
+href="#mouse">below</a> for details.
+<p>
+
+<tt>-outputpos</tt> outputs hand position info to stdout so you can
+pipe it into your own applications. See <a href="#apps">below</a> for more
+details.
+<p>
+
+<tt>-train</tt> runs the tracker in `lighting condition training' mode.
+See <a href="#lighting">`lighting conditions'</a> below for details.
+<p>
+
+<tt>-hist &ltfilename&gt</tt> specifies the colour histogram filename.
+See <a href="#lighting">`lighting conditions'</a> below for details.
+<p>
+
+<tt>-f &ltred filter value&gt &ltgreen filter&gt &ltblue filter&gt</tt>
+sets the colour filter values to suit your lighting conditions.
+See <a href="#lighting">`lighting conditions'</a> below for details.
+Defaults are 4.0, -2.0, -2.0.
+<p>
+
+<tt>-w &ltsize&gt</tt> specifies the relative window size. Default is
+1, other valid options are 2 and 0.5. Using a smaller window speeds up
+the tracker a bit since there are less pixels to write to the
+screen. Using a larger windows slows it down a lot.
+<p>
+
+<tt>-d &ltinterval&gt</tt> dictates how frequently the IndyCam view is
+echoed to screen. Default is 1; increasing to 2 displays every other
+frame, 3 does every 3rd frame etc. This is purely to speed the tracker
+up by way of fewer screen-writes.
+<p>
+
+<tt>-r</tt> periodically outputs the frame rate.
+<p>
+
+<tt>-s</tt> outputs the number of model points which have `found an
+edge' in each frame.
+<p>
+
+
+<tt>-thicklines</tt> draws the hand outline thicker so it's more
+visible.
+<p>
+
+<tt>-noannotate</tt> suppresses the sizing circle and angle line which
+usually accompany the hand outline.
+<p>
+
+
+<a name="mouse">
+<h2>Using the hand tracker to control the mouse pointer</h2>
+</a>
+
+Yes! You can now control the mouse pointer without even touching the
+mouse! Try:
+
+<pre>
+tracker -mouse
+</pre>
+
+The pointer moves with the position of your hand. You
+perform mouse button clicks by moving your thumb.
+
+<a name="apps">
+<h2>Using the hand tracker to control your own applications</h2>
+</a>
+
+You can use the hand tracker to control your own applications if you
+want. There are two ways to do this. The simplest is to use the
+tracker in output mode by typing:<p>
+
+<pre>
+tracker -outputpos
+</pre>
+
+The tracker spurts position info to <tt>stdout</tt> which can be piped
+into you application or whatever. The format of the output is as
+follows:<p>
+
+<pre>
+X = &ltx coordinate of centre of hand&gt
+Y = &lty coordinate of centre of hand&gt
+SIZE = &ltapproximate width of hand in pixels, divided by two&gt
+ANGLE = &ltangle of hand to horizontal in degrees (upright is -90 deg)&gt
+DEFORM = &ltlist of deformation parameters from which hand shape can be
+	  determined (default is 4 params, but can be overridden by -v
+	  switch)&gt
+THUMB_IN = &lt0 if the thumb is out, 1 if the thumb is in&gt
+</pre>
+
+I plan to include other parameters in a future version, such as the
+position of the thumb (`in' or `out'), so allow for unrecognized
+parameters in any code you write. Also, let me know if you have any
+special requests.<p>
+
+A more sophisticated way to link the hand tracker to your own
+applications has been developed by  <a
+href="http://http2.brunel.ac.uk:8080/~empgrrb/">Richard Bowden</a>; it's geared
+primarily towards (but not limited to) Inventor(TM)
+applications. Click <a href="/~richard/handtrackertop.html">here</a>
+for more details.
+
+<p>
+<HR>
+<p>
+
+<A HREF="welcome.html"><IMG SRC="Images/home.gif"></A>
+
+</BODY>
+
+<p>
+<HR>
+<p>
+
+<ADDRESS>
+Tony Heap - ajh@comp.leeds.ac.uk
+</ADDRESS>
+
+</HTML>

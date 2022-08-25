@@ -1,0 +1,201 @@
+<HTML>
+
+<HEAD>
+<title>Tony Heap's Homepage</title>
+<!-- Changed by: T Heap (CoMIR),  10-Oct-1995 -->
+
+<HR>
+</HEAD>
+
+<BODY>
+<img align=right alt="(University of Leeds Logo)" src="Images/leedslogo.gif" width=108 height=114>
+
+<img align=left alt="ME!" src="Images/tony.gif">
+
+<H1>Tony Heap</H1><P>
+
+<ul>
+<li><b>Electronic Mail: </b> <i> <a href="mailto:ajh@comp.leeds.ac.uk">ajh@comp.leeds.ac.uk</a></i>
+<li><b>Office Phone: </b><i>0113 233 6818</i>
+<li><b>Fax: </b><i>0113 233 5468</i>
+<li><b>Snail Mail: </b><br>
+<ul>
+<ul>
+	<a href="http://dream1.leeds.ac.uk/~vislib/">
+	  Machine Vision Group</a><br>
+	<a href="http://agora.leeds.ac.uk/">School of Computer Studies</a><br>
+	<a href="http://www.leeds.ac.uk">The University of Leeds</a><br>
+	Leeds, LS2 9JT<br>
+	United Kingdom<br>
+</ul>
+</ul>
+</ul>
+
+<p>
+<HR>
+<p>
+
+<IMG SRC="Images/atwork.gif">
+For a long time there's been a message here saying that this page is
+still under construction. I have now reached the point where I've
+realised that I'm never going to have time to do a proper job of it,
+so instead I'm going to claim that this is the finished version. It's
+just not very good, that's all. I figured that you don't really want
+to know that I like skiing, I play drums and my favourite colour is
+blue, so I've just put the researchy stuff in.
+
+<p>
+<HR>
+<p>
+
+<h2>Research - Model-Based Hand Tracking</h2>
+
+<h3>Overview</h3>
+
+I am currently investigating robust, model-based methods for tracking
+deformable objects. I am particularly interested in tracking human hands
+with a view to recognising gestures. Possible applications are
+computer-assisted sign language and human-computer interaction.<p>
+
+I have constructed hand tracking systems based on both 2D and 3D hand
+models. The 2D tracker can follow a hand which is held up to the
+camera, palm out with all fingers showing. Different gestures can be
+performed and recognised. Here's a picture of the tracker in action...<p>
+
+<center>
+<IMG SRC="Images/tracker.gif"><p>
+</center><p>
+Click <a href="Movies/tracker.mpg">here</a> for a video
+clip (100Kb MPEG).<p>
+
+<h3>Downloadable Hand Tracker Demo</h3>
+
+If you have a Silicon Graphics Indy(TM) running Irix 5.3 or later, you
+can try the hand tracker out for yourself. Click <a
+href="tracker.html">here</a> for more info.
+<p>
+
+<h3>Work in Collaboration</h3>
+
+There has also been some work on gesture analysis by <a
+href="http://http2.brunel.ac.uk:8080/~empgrrb/">Richard Bowden</a>
+which made use of the Leeds Hand
+Tracker. Click <a href="http://http2.brunel.ac.uk:8080/~empgrrb/handtrackertop.html">here</a> for
+more details.
+<p>
+
+<h3>3D Hand Tracking</h3>
+
+The 3D tracker uses a hand model constructed from a training set of
+Magnetic Resonance images (acquired with the kind help of St James'
+University Hospital, Leeds) of hands in different positions. A surface
+mesh was fitted to each example using physically-based modelling
+techniques, and a 3D PDM was built from the meshes. The 3D PDM is used to
+track an unmarked hand from a single video camera. A paper detailing
+the techniques used is currently under consideration for presentation
+at the 2nd International Conference on Face and Gesture Recognition,
+to be held in Vermont, New England in October 1996. Here's a snapshot
+or two of the 3D tracker in action...<p>
+
+<center>
+<IMG SRC="Images/3dtracker1.gif">
+<IMG SRC="Images/3dtracker2.gif"><p>
+</center><p>
+
+With a view to improving the performance and robustness of my
+trackers, I have been looking at ways of modifying the Point Distribution Model
+(PDM) to allow for non-linear types of deformation (such as is present
+in human hands). I have developed the `Cartesian-Polar Hybrid PDM' which
+allows pivotal structures to be modelled directly. I am also working
+on another approach to this problem, and if it's successful, I'll tell you
+about it.
+
+<p>
+<HR>
+<p>
+
+<h2>Publications</h2>
+
+<li><b>Real-Time Hand Tracking and Gesture Recognition using Smart
+Snakes</b>,
+A. J. Heap,
+<i>Proc. Interface to Real and Virtual Worlds</i>,
+Montpellier, June 1995 (available as
+<a href="ftp://ftp.cam-orl.co.uk/pub/docs/ORL/tr.95.1.ps.Z">Olivetti
+Research Limited Tech Report 95.1</a>).
+<p>
+
+<li><b>Extending the Point Distribution Method Using Polar
+Coordinates</b>,
+A. J. Heap and D. C. Hogg,
+<i>Proc. Computer Analysis of Images and Patterns</i>,
+Prague, September 1995 (available as <a
+href="ftp://agora.leeds.ac.uk/scs/doc/reports/1995/95_5.ps.Z">SCS
+Tech Report 95.5</a>).
+<p>
+
+<li><b>Automated Pivot Location for the Cartesian-Polar Hybrid Point
+Distribution Model</b>,
+A. J. Heap and D. C. Hogg,
+<i>Proc. British Machine Vision Conference</i>,
+Birmingham, September 1995 (available as <a
+href="ftp://agora.leeds.ac.uk/scs/doc/reports/1995/95_26.ps.Z">SCS
+Tech Report 95.26</a>).
+<p>
+
+<li><b>Extending the Point Distribution Method Using Polar
+Coordinates</b> (a combination of the above two papers),
+A. J. Heap and D. C. Hogg,
+<i>Image and Vision Computing Journal</i>, August 1996.
+<p>
+
+<li><b>3D Deformable Hand Models</b>,
+A. J. Heap and D. C. Hogg,
+<i>Gesture Workshop</i>, York, UK, March 1996.
+(available as compressed postscript
+<a href="Postscript/3dmodels.ps.Z">3dmodels.ps.Z</a> (257K))
+<p>
+
+<li><b>Real Time Hand Tracking and Gesture Recognition as a 3D Input
+Device for Graphical Applications</b>,
+R. Bowden, A. J. Heap and D. C. Hogg,
+<i>Gesture Workshop</i>, York, UK, March 1996.
+<p>
+
+<li><b>Virtual Datagloves: Interacting with virtual environments through
+computer vision</b>,
+R. Bowden, A. J. Heap and C. Hart,
+<a href="http://www.cms.dmu.ac.uk/VRSIG96/">
+<i>Proc. 3rd
+UK VR-Sig Conference,</i></a>
+DeMontfort University, Leicester, UK, July 1996
+(available as gzipped postscript
+<a href="http://http2.brunel.ac.uk:8080/~empgrrb/pulications/vrsig.ps.gz">
+vrsig.ps.gz</a>).<p>
+
+<li><b>Towards 3D Hand Tracking using a Deformable Model</b>,
+A. J. Heap and D. C. Hogg,
+submitted to <i>2nd International Face and Gesture Recognition
+Conference</i>, Vermont, New England, October 1996.
+(available as compressed postscript
+<a href="Postscript/3dtracker.ps.Z">3dtracker.ps.Z</a> (456K))
+<p>
+
+<li><b><a href="Docs/hierarchical/paper.html">Improving Specificity in PDMs using a Hierarchical Approach</a></b>,
+A. J. Heap and D. C. Hogg,
+to appear in <i>Proc. British Machine Vision Conference</i>, Essex, UK, September 1997.
+(available as compressed postscript
+<a href="Postscript/hierarchical.ps.gz">hierarchical.ps.gz</a> (349K))
+<p>
+
+</BODY>
+
+<p>
+<HR>
+<p>
+
+<ADDRESS>
+Tony Heap - ajh@comp.leeds.ac.uk
+</ADDRESS>
+
+</HTML>

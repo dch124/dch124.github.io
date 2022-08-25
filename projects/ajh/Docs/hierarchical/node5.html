@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1-f (May 31, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>5 Conclusions</TITLE>
+<META NAME="description" CONTENT="5 Conclusions">
+<META NAME="keywords" CONTENT="hpaper">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="hpaper.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html70" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://cbl.leeds.ac.uk/nikos/figs/next_motif.gif"></A> <A NAME="tex2html68" HREF="hpaper.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://cbl.leeds.ac.uk/nikos/figs/up_motif.gif"></A> <A NAME="tex2html62" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://cbl.leeds.ac.uk/nikos/figs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html71" HREF="node6.html">References</A>
+<B>Up:</B> <A NAME="tex2html69" HREF="hpaper.html">Improving Specificity in PDMs  </A>
+<B> Previous:</B> <A NAME="tex2html63" HREF="node4.html">4 Evaluation</A>
+<BR> <P>
+<H1><A NAME="SECTION00050000000000000000">5 Conclusions</A></H1>
+<P>
+We have described the construction of `hierarchical' PDMs, using a
+piecewise linear PCA strategy. We have performed both qualitative and
+quantitative analyses on synthetic data, and also examined performance
+on automatically-collected real data, with promising results. The HPDM
+is a viable solution to the problem of fully-automated construction of
+deformable models.
+<P>
+The hierarchical approach requires a
+large amount of training data to build good
+models. However, this problem is negated by the fact that training
+data can be collected automatically. In the example of the hand we gave,
+it took less than 5 minutes to collect all the training data and build
+the model. More intelligent training data
+collection (eg. Hill and Taylor's approach&nbsp;[<A HREF="node6.html#hill96">7</A>])
+might give rise to a less complex shape space which could then be modelled
+with fewer linear pieces.
+<P>
+Another issue is that of speed. When applying the shape constraints it
+is necessary to calculate distances to every cluster. This process is
+order <I>n</I> in the number of clusters. Bregler and Omohundro suggest the
+use of `Bumptrees'&nbsp;[<A HREF="node6.html#omohundro91">8</A>] (a tree-like data structure for
+representing functions and constraints) to decrease the number of
+calculations. A related approach would be to extend the hierarchical
+model to more than two levels, inserting intermediate-sized PCA spaces
+between the coarsest (global) and finest levels to give a multi-level
+tree structure. Search for the nearest cluster(s) would descend
+through the tree, giving at worst order <I>n</I> log <I>n</I> performance and
+maybe better in the case of only a partial tree descent.
+<P>
+Tracking using HPDMs has proven relatively successful, proceeding in
+much the same way as for a standard PDM&nbsp;[<A HREF="node6.html#cootes95">3</A>]; HPDMs are
+less likely to be distracted by image noise and background
+clutter. However, in the case of automatically trained models, some
+deformations are not tracked well, specifically those which require
+landmarks to `slide' around the model boundary or those which give
+rise to sudden shape changes. A solution to this problem is discussed
+in&nbsp;[<A HREF="node6.html#heap97a">5</A>].
+<P>
+<SMALL CLASS=SMALL>
+</SMALL><HR><A NAME="tex2html70" HREF="node6.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://cbl.leeds.ac.uk/nikos/figs/next_motif.gif"></A> <A NAME="tex2html68" HREF="hpaper.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://cbl.leeds.ac.uk/nikos/figs/up_motif.gif"></A> <A NAME="tex2html62" HREF="node4.html"><IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://cbl.leeds.ac.uk/nikos/figs/previous_motif.gif"></A>   <BR>
+<B> Next:</B> <A NAME="tex2html71" HREF="node6.html">References</A>
+<B>Up:</B> <A NAME="tex2html69" HREF="hpaper.html">Improving Specificity in PDMs  </A>
+<B> Previous:</B> <A NAME="tex2html63" HREF="node4.html">4 Evaluation</A>
+<P><ADDRESS>
+<I>A J Heap <BR>
+Wed Jul  2 14:34:50 BST 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>
