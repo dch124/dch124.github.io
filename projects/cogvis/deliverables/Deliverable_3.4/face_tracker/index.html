@@ -1,0 +1,48 @@
+<html>
+<head>
+   <title>Leeds Face Tracker Software</title>
+</head>
+<body text="#000000" bgcolor="#F1F8F1">
+
+<hr>
+<table BORDER=0 CELLPADDING=10 >
+<tr>
+<td><img SRC="http://www.comp.leeds.ac.uk/vision/img/kvglogo6t-156x87.gif" ALT="*"  align=LEFT></td>
+
+<td>
+<center><b><font size=+3>Face Tracker Software</font></b></center>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+
+
+This is a reimplementation of the Manchester face tracker, extended to work with spline curves rather than landmark points and also to work in color.
+<br><br>The tracker works by matching a face model to a movie input (or live camera). The face model can generate a face with different expressions by varying parameters. 4 affines (x,y,scale,rotation) and an defined number of combined ones (shape + color eigen components). The tracker updates the face model via an error model previously learned.
+
+
+<br><br>The code available from this page was used to provide results for the paper:
+<BR>
+<BR>
+<DD><b>Reactive Memories : An Interactive Talking Head</b><BR> 
+<DD><A HREF="http://www.comp.leeds.ac.uk/vincent/">V. E. Devin </A>and <A HREF="http://www.comp.leeds.ac.uk/staff/dch.html">D. C. Hogg</A>, <BR>
+<DD>Published in The British Machine Vision Conference 2001<BR>
+<DD>Available as : <A HREF="bmvc2001.ps.gz">postscript</A> <BR>
+<BR>
+
+<br><br>For the code disribution click on the version below.
+<br><a href="facetracker.tar.gz">Version 1.2</a>
+<BR>
+<BR>
+Matlab code to generate the face model (from an mpeg file) :<BR>
+<a href="facemodel_maker.tar.gz">Version 1.2</a>
+<BR>
+<BR>
+Any question, comment or bug reports : <a href="mailto:vincent@comp.leeds.ac.uk">vincent@comp.leeds.ac.uk</a>
+
+</td>
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../vision.css">
+  <meta name="Author" content="Vision Group">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>CogVis: The Cognitive Vision Project</title>
+</head>
+<body class="body">
+
+<table border="0" cellpadding="10">
+<tr>
+<td><a name="top"></a><img src="kvglogo6t-156x87.gif" alt="Vision Group Logo"></td>
+<td>
+<h1>CogVis: Leeds Car/Blob Tracker</h1>
+</td>
+</tr>
+</table>
+
+<p>The tracker works by segmenting the foreground from the background 
+using a mixture of Gaussian background model. Individual objects are extracted
+by associating pixels with models of position, colour, velocity and size and
+re-estimating the models. Model position is propagated from frame to frame 
+using a Kalman filter per model. A model of typical velocity over the 
+groundplane may be used to improve Kalman filter initialisation (but is not
+necessary for the operaton of the tracker).</p>
+
+
+<p>The tracker is described in the papers:</p>
+
+<p>D. Magee, 
+Tracking Multiple Vehicles using Foreground, Background and Motion Models,
+Image and Vision Computing, vol 22(2), pp143-155, 2004.</p> 
+<p>D.Magee, Tracking Multiple Vehicles Using Foreground, Background and Motion Models . Proc. ECCV Workshop on Statistical Methods in Video Processing , pp7-12, June 2002. An early version of which is available as a <a href="ftp://ftp.comp.leeds.ac.uk/scs/doc/reports/2001/2001_21.pdf">Research Report.</a></p>
+
+<table border=0 cellpadding=10 >
+<tr>
+  <td><img src="bg.gif" alt="Image of foreground segmentation" align="left"></td>
+  <td><img src="op.gif" alt="Image of tracking results"  align="left"></td>
+</tr>
+<tr>
+  <td>Foreground segmentation</td> 
+  <td>Tracking Results (Red dots are potential objects not yet confirmed)</td> 
+</tr>
+<tr>
+  <td><img src="gp.gif" alt="Image of tracking results in the groundplane" align="left" height="400"></td> 
+  <td><img src="gpmod.gif" alt="Image of typical velocity model" align="left" height="400"></td>
+</tr>
+<tr>
+  <td>Tracking Results projected to groundplane</td>
+  <td>Typical Velocity Model</td>
+</tr>
+</table>
+
+</body>
+</html>

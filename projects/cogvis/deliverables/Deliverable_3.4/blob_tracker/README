@@ -1,0 +1,94 @@
+Leeds Car/Blob Tracker Distribution 1.1
+---------------------------------------
+(c) Derek Magee, University of Leeds
+
+Leeds Vision Group give permission for this code to be copied, modified
+and distributed within the University of Leeds and the CogVis consortium 
+subject to the following conditions:-
+
+- The code is not to be used for commercial gain.
+- The code and use thereof will be attributed to the authors where
+  appropriate (including demonstrations which rely on it's use).
+- All modified, distributions of the source files will retain headers.
+
+System Requirements
+-------------------
+Will run on most Linux systems. Test systems inc:
+
+RedHat 7.1/7.2/7.3
+Intel PIII (various speeds)
+NVIDIA and ATI graphics cards 
+
+Libraries
+_________
+
+Supplied libraries required are:
+
+libBGD.a
+libmpeg3.a 
+libRTImage.a
+libglow.a
+libquicktime.a
+libRTImageDisplay.a
+
+Other (standard libraries) required are:
+
+-lpng -lz -lglib -ldl -lglut -lGLU -lGL -lX11 -lm -lpthread
+
+These should be installed as standard on your linux distribution. 
+Note: Recent versions of RedHat (and other distributions) do not install the
+GLUT library by default. You must install this manually from rpms or source
+(usualy provided with the distribution). 
+
+FIRST: To make the supplied libraries type:
+
+make clean
+make
+
+(NOTE: libmpeg3/libglow/libquicktime are configured for my machine, to 
+re-configure enter the appropriate directory and follow the instructions)
+
+NEXT: To make tracker type:
+
+make tracker
+
+Running
+-------
+
+./drm_cartrack/track_cars <mpeg file> (<groundplane model>)
+
+N.B. Output is written to a file (/tmp/track_cars.out by default) 
+
+Building Groundplane Models
+---------------------------
+Groundplane models are built from the output of the tracker (or similarly
+formatted file). These can improve the initialisation of the tracker to a 
+degree, although the tracker can work without such a model. 
+
+To make the executable enter the groundplane_model directory and type 'make'.
+To build the model use:
+
+Usage ./cluster_road <data file> <projective angle> <x offset> <outfile>
+
+where:
+
+<data file> : output file of tracker
+<projective angle> : groundplane projection angle (see GP_CALIBRATION_ANGLE in
+                     drm_cartrack/track_cars_defs.h)
+<x offset> : Offset of x co-ordinates from centre (half image width)
+<outfile> : Output model file
+
+Format of the model file is:
+
+ROADMODEL DATA FILE    // File ID
+COV 22213.732077 29097.706183 29097.706183 73164.169881 // Global Covariance
+NO_PROTS 150  // No of prototypes
+
+// Then the prototype data .....
+
+<x gp pos> <y gp pos> <normalised direc x> <normalsed direc y> <speed> <local badwidth factor of cov>  
+
+Problems
+--------
+
+Please report any problems to drm@comp.leeds.ac.uk

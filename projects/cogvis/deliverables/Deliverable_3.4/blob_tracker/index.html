@@ -1,0 +1,82 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.78 [en] (X11; U; Linux 2.4.9-31custom i686) [Netscape]">
+   <title>Leeds Car/Blob Tracker Software</title>
+</head>
+<body text="#000000" bgcolor="#F1F8F1">
+
+<hr>
+<table BORDER=0 CELLPADDING=10 >
+<tr>
+<td><img SRC="http://www.comp.leeds.ac.uk/vision/img/kvglogo6t-156x87.gif" ALT="*"  align=LEFT></td>
+
+<td>
+<center><b><font size=+3>Leeds Car/Blob Tracker Software</font></b></center>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+
+
+
+<br><br>The tracker works by segmenting the foreground from the background 
+using a mixture of Gaussian background model. Individual objects are extracted
+by associating pixels with models of position, colour, velocity and size and
+re-estimating the models. Model position is propagated from frame to frame 
+using a Kalman filter per model. A model of typical velocity over the 
+groundplane may be used to improve Kalman filter initialisation (but is not
+necessary for the operaton of the tracker).
+
+
+<br><br>The code available from this page is based on the paper:
+
+<br><br>D.Magee, Tracking Multiple Vehicles Using Foreground, Background and Motion Models . Proc. ECCV Workshop on Statistical Methods in Video Processing , pp7-12, June 2002. An extended version of which is available as a <a href="blob_track_report.pdf">Research Report.</a></li> 
+<br>
+
+<br>For the README file associated with the tracker click <a href="README">here</a>
+
+<br><br>For the code disribution click on the version below.
+<br><a href="cartracker1.1.tar.gz">Version 1.1</a>
+
+<br><br><a href="car_short.mpg">Here</a> is an example movie input file.
+
+
+<table BORDER=0 CELLPADDING=10 >
+<tr>
+<td>
+<img SRC="bg.gif" ALT="*"  align=LEFT>
+</td>
+<td>
+<img SRC="op.gif" ALT="*"  align=LEFT>
+</td>
+</tr>
+
+<td>
+Foreground segmentation
+</td> 
+<td>
+Tracking Results (Red dots are potential objects not yet confirmed)
+</td> 
+<tr>
+<td> 
+<img SRC="gp.gif" ALT="*"  align=LEFT>
+</td> 
+<td>
+<img SRC="gpmod.gif" ALT="*"  align=LEFT height=400>
+</td>
+</tr>
+<tr>
+<td>
+Tracking Results projected to groundplane
+</td>
+<td>
+Typical Velocity Model
+</td>
+
+</tr>
+</table>
+</body>
+</html>

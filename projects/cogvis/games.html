@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../vision.css">
+  <meta name="Author" content="Vision Group">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>CogVis: The Cognitive Vision Project</title>
+</head>
+<body class="body">
+                                                                                                                                                          
+<table border="0" cellpadding="10">
+<tr>
+<td><a name="top"></a><img src="kvglogo6t-156x87.gif" alt="Vision Group Logo"></td>
+<td>
+<h1>CogVis: Learning games from observation</h1>
+</td>
+</tr>
+</table>
+
+<a href="http://www.bcs-sgai.org/micomp/2004.html">System wins BCS Machine Intelligence Competition 2004</a>
+
+<p>In this piece of work we are attempting to learn descriptions of objects and
+events in an entirely autonomous way. Our aim is zero human interference in the
+learning process, and only to use non scene specific prior information. The
+resulting models (object and protocol) are used to drive a synthetic agent that
+can interact in the real world. </p>
+
+
+<table border="0" cellpadding="10" >
+<tr>
+  <td><img SRC="chris_and_derek.jpg" ALT="Image of two humans playing a game from which to learn" width="400"></td>
+  <td><img SRC="chris_and_computer.jpg" ALT="Image of human playing against a learned virtual player" width="400"></td>
+</tr>
+<tr>
+  <td>Two humans playing a table top game</td>
+  <td>A human playing against a learned virtual player</td>
+</tr>
+</table>
+
+<h2>Demonstration</h2>
+
+<p> The game paper-scissors-stone is played by two players each with
+<a href="cards.jpg">three cards</a>. First a training phase is observed by the computer in which
+two players each place a card on the table, and one player describes the
+result through the utterances (play, win, draw, &amp; lose). <a
+href="./movies/paperscissorstone_train.mpg">TRAINING MOVIE (Mpeg
+45MB)</a>. In this phase objects are detected and clustered without
+supervision from the video stream (from the camera at the top left of
+the movie, real-time tracking can be seen on the monitor), and
+utterances are detected and clustered without supervision from the audio
+stream. Next the (symbolic) protocols of the game a learned using
+inductive logic programming, and an autonomous cognitive agent is
+formed. The system is now able to interact with a player, and
+automatically decide which vocal response/command to utter. This can be
+seen in the <a href="./movies/paperscissorstone_play.mpg">COGNITIVE
+AGENT MOVIE (Mpeg 67MB)</a>. The player in view is now responding to the
+commands of the agent and says nothing himself.</p>
+
+<h3>New Movies - with talking head</h3>
+
+<p>
+On another run of `Paper, Scissors, Stone', a talking head is incorporated to add 
+realism to the synthetic agent. These movies contain sound, which is essential for viewing.
+First the
+<a href="./movies/cogvis_demo_learning.avi">Training phase (AVI 27MB)</a>. Once learning is complete, then in the <a href="./movies/cogvis_demo_playing.wmv">Playing phase (WMV 8MB)</a> the agent makes all the vocal utterances (and the head speaks them).  
+<a href="./movies/waiting_head.avi">Waiting head example (AVI 8MB)</a> shows the head whilst it waits for an action to occur. A close up of the response from the head when driven by the perceptual inputs can be seen in 
+<a href="./movies/talking_head.avi">Talking head close up (AVI 32MB)</a>.</p>
+
+<h2>Related Publications</h2>
+<p>Needham, Chris J; Santos, Paulo E; Magee, Derek R; Devin, Vincent; Hogg, David C; Cohn, Anthony G. <i>Protocols from perceptual observations</i>. <b>Artificial Intelligence</b>, vol. 167, pp. 103-136. 2005.(<a href="http://www.comp.leeds.ac.uk/chrisn/research/aij2005.pdf">PDF</a>)  Also, the symbolic data used in the paper may be downloaded from <a href="game-data.zip">here</a>.</p>
+<p>Magee, D R; Needham, C J; Santos, P E; Rao, S. <i>Inducing the focus of attention by observing patterns in space</i> in:  <b>IJCAI Workshop on Modelling Others from Observations (MOO 2005)</b>, pp. 47-52. 2005. (<a href="http://www.comp.leeds.ac.uk/chrisn/research/moo2005.pdf">PDF</a>)</p>
+<p>Magee, D R; Needham, C J; Santos, P; Cohn, A G; Hogg, D C. <i>Autonomous learning for a cognitive agent using continuous models and inductive logic programming from audio-visual input</i> in:  <b>Proceedings AAAI-04 Workshop on Anchoring Symbols to Sensor Data</b>, pp. 17-24. 2004.
+(<a href="http://www.comp.leeds.ac.uk/qsr/pub/AAAI04_anchoringws.pdf">PDF</a>) 
+</p>
+<p>Magee, D. <i>Tracking multiple vehicles using foreground, background and motion models</i>. <b>Image and Vision Computing</b>, vol. 22, pp. 143-155. 2004.</p>
+<p>Santos, Paulo; Magee, Derek; Cohn, Anthony; Hogg, David. <i>Combining multiple answers for learning mathematical structures from visual observation</i> in:  Lopez de Mantaras, R &amp; Saitta, L (editors) <b>ECAI 2004 Proceedings of the 16th European Conference on Artificial Intelligence</b>, pp. 544-548 IOS Press. 2004.  (<a href="http://www.comp.leeds.ac.uk/qsr/pub/C0255_cameraReady.pdf">PDF</a>)</p>
+<p>Santos, P; Magee, D; Cohn, A G. <i>Looking for logic in vision</i> in:  <b>Proceedings Eleventh Workshop on Automated Reasoning</b>, pp. 61-62. 2004.</p>
+
+
+<h2>Link</h2>
+
+<p><a href="http://www.comp.leeds.ac.uk/dch/projects/cogvis/index.html">The Cognitive Vision (CogVis) Project</a></p>
+
+</body>
+</html>
