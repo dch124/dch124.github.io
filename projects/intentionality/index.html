@@ -1,0 +1,400 @@
+<!--#include virtual="/vision/WEB_head.html" -->
+Vision Group: Intentionality in computer vision 
+<!--#include virtual="/vision/WEB_menu.html" -->
+<!--#set var="owner_email" value="hannah" -->                    
+<!--#set var="owner_name" value="Dr Hannah Dee" --> 
+
+<h1>Intentionality within computer vision</h1>
+
+<p align="center"><a href = "#scene">Scene modelling</a> | <a href = "#online">Online
+model</a> | <a href = "#navigation">Navigational strategies</a> |
+<a href = "#surveillance">Surveillance</a> |
+<a href = "#evaluation">Evaluation</a> |
+<a href = "#publications">Relevant publications</a> |
+<a href = "#links">Links</a></p>
+
+
+
+<p> This page describes work carried out by <a href =
+"http://www.comp.leeds.ac.uk/cgi-bin/sis/ext/staff_pub.cgi/hannah.html?cmd=displaystaff">Hannah
+Dee</a> and <a href =
+"http://www.comp.leeds.ac.uk/cgi-bin/sis/ext/staff_pub.cgi/dch.html?cmd=displaystaff">David
+Hogg</a> into the use of <i>intentionality</i> within behaviour
+modelling. Inspired by work in the philosophy of mind on levels of
+explanation, and by work on human navigation within psychology, this
+work tries to incorporate high level psychological constructs into the
+problem of behaviour modelling in computer vision.  When observing
+human behaviour, the questions we find ourselves asking are not to do
+with typicality of movement or statistical patterns of motion, but to
+do with the goals and intentions of the people moving around within
+the scene. In effect, we ask ourselves "Where are they going?". The
+sorts of answer that would satisfy these questions are attributions of
+motive or goal: "She's going towards that particular car". Such a goal
+attibution is a form of explanation (an <i>intentional</i>
+explanation), and will cause us to ignore the
+person in question, their behaviour having been <i>explained
+away</i>.</p>
+
+<p>This work produced two systems which perform analysis of behaviour
+within a surveillance context taking advantage of this insight. These
+systems are the first that work at the psychological level of
+intentionality. <a href = "#online">The online system</a> uses an
+ad-hoc model of goal-directed behaviour and recalculates possible
+intentions at each frame, whilst <a href = "#navigation">the other
+uses models of navigation from the psychological literature</a> only
+calculating the possible intentions once.  Both systems rely on the
+same <a href = "#scene">scene model</a>, detailling the location and
+extent of exits and obstacles.  A novel protocol has also
+been developed for the <a href = "#evaluation">evaluation of
+surveillance and event-detection systems</a>, in which the performance
+of an algorithm is correlated against the performance of a group of
+humans performing the same task.  Both of the systems are evaluated
+using this criteria and are shown to be in broad agreement with human
+judgements.  <a href = "#surveillance">Specific surveillance
+applications</a> are discussed, which use the distance scores from the
+behaviour modelling output as an indication of "interestingness".
+
+<h2>Modelling the scene</h2>
+<a name="scene"></a>
+
+<p>Before being able to determine the intentions or <i>goals</i> of
+the people moving around within a scene, we need to know certain
+things about that scene's geography: where the physical goals are
+actually located. Within the kinds of situation investigated in this
+work (pedestrian and car-park scenarios), goals are either
+<b>cars</b>, <b>entrances/exits</b> or <b>doorways</b> and are defined
+by their size and geographical location in space. In line with others
+in computer vision (e.g. McKenna and Nait-Charif '04, Stauffer '03,
+Makris and Ellis '02) exit locations for geographical goals were
+learned by fitting a Gaussian mixture model to the start and end
+points of trajectories. Those cars initially in the carpark had their
+location marked by hand, and other vehicles were located by assuming
+that the end of a car trajectory resulted in a car parking (unless
+that trajectory ended near one of the previously determined exits).
+The obstacle model was created by hand, and then converted into
+polygonal form by straight-line approximation.</p>
+
+<table border="0" cellpadding="10" >
+<tr>
+  <td><img SRC="scene.jpg" ALT="Car park scene"></td>
+  <td><img SRC="exits.jpg" ALT="Learned exit model" ></td>
+  <td><img SRC="obstacles.jpg" ALT="Hand crafted obstacle model" ></td>
+</tr>
+<tr>
+  <td>The car-park scene used as one of the test scenes</td>
+  <td>Entrances and exits learned for this scene</td>
+  <td>Obstacle model hand-crafted for this scene</td>
+</tr>
+</table>
+
+<p>We also made use of the PETS2004 dataset, which provided ground 
+truth in the form of <i>x,y,t</i> for a small number (n&lt;30) of
+agents. Due to the small size of this dataset we were unable to use
+machine learning techniques for exit location and instead constructed
+the exit model by hand.</P> 
+
+<h2>An online model of path-planning</h2>
+<a name="online"></a>
+
+<p>The first system developed using ideas of intentionality relied
+upon an algorithm that recalculated possible goals for each agent at
+each timestep. This implementation has since become called <i>the
+online algorithm</i> and is covered in more depth in our paper from
+BMVC 2004 "Detecting Inexplicable Behaviour" <a href =
+"https://doi.org/10.5244/C.18.50">PDF
+link</a>.</p>
+
+<p>In the online implementation, the scene is divided into polygonal
+areas depending upon what we call <i>sub-goals</i>.  In a scene
+without obstacles, it would be possible to determine the goal of an
+agent by simply noting what direction they were walking in. With
+obstacles, the situation is both more complicated and more
+interesting. The agent might have to first move away from their goal
+in order to circumvent some intervening obstacle.  To account for this
+fact we introduce <i>sub-goals</i>. A sub-goal is an intermediate,
+virtual goal placed at a tangential vertex of an obstacle. These are
+places where, were the agent at that place, they would be able to see
+more of the scene than they currently can.  To summarise:</p>
+
+<ul>
+<li>First we determine the
+polygon of area visible from the agent's current location.</li>
+<li>Then we
+restrict this to areas within 1 radian either side of the agent's
+direction of motion.</li> 
+<li>We then find all possible sub-goals adjacent to this area.</li>
+<li>From each sub-goal, we repeat this process, marking the polygon of
+scene visible from that sub-goal, and any further possible sub-goals. 
+</li></ul> 
+
+<p>Sub-goals are recorded along with their "level" - the sub-goals
+visible from the agent's current location are <i>level one</i>
+sub-goals, those visible from level one sub-goals are called <i>level
+two</i> sub-goals, and so on.  The illustration below shows a sample
+(fictitious) scene with sub-goals shown as green circles and three
+levels of sub-goal analysis (S<sub>0</sub>, S<sub>1</sub>, and
+S<sub>2</sub>).</p>
+
+<table>
+<tr><td rowspan="5"><img src = "contrived_illus.png" alt="Contrived sub-goal illustration"></td>
+<td><img src = "g.png" alt="goal"></td><td>Goal</td>
+<td><img src = "sg.png" alt="sub-goal"></td><td>Sub-goal</td></tr>
+<tr><td><img src = "agent.png" alt="agent"></td><td>Agent</td>
+<td><img src = "o.png" alt="obstacle"></td><td>Obstacle</td></tr>
+<tr><td><img src = "a.png" alt="accesible via zero sub-goals (directly headed towards)"></td><td>Direct path headed towards
+(S<sub>0</sub>)</td>
+<td><img src = "s1.png" alt="accessible via one sub-goal"></td><td>Accessible via one sub-goal (S<sub>1</sub>)</td></tr>
+<tr><td><img src = "s2.png" alt="accesible via 2 sub-goals"></td><td>Accessible via two sub-goals (S<sub>2</sub>)</td>
+<td><img src = "d.png" alt="headed away from"></td><td>Direct path but headed away
+(D)</td></tr>
+<tr><td><img src = "n.png" alt="not visible"></td><td>Not visible at all (N)</td><td></td></tr>
+</Table>
+
+<p>We now have agent-centered "maps" for each agent for each frame,
+and as the agent moves through this scene (presumably towards their
+final goal) the pattern of activity at each goal location changes. If
+the agent heads in a straightforward, goal-directed fashion towards
+their final goal we can assume that whatever state it starts out in
+(S<sub>3</sub>, for example), as the agent moves towards that goal it
+will progress through levels of sub-goal which get lower and lower,
+finishing with the agent heading directly towards the goal (it will be
+in state S<sub>0</sub>). We use a finite state automata to capture
+this pattern of goal activation, and associate costs with those goal
+transitions associated with motion away from a goal.  In this way we
+can convert a pattern of goal activations to an "intentionality score"
+or cost for each goal within the scene.  We assume that the lowest
+cost goal is the agent's final goal, and use this to represent the
+entire trajectory. The finite state automata is shown below.  </p>
+
+<img src = "fsm_dia.png" alt="FSM diagram showing state transition costs">
+
+<p>A movie showing this system in action in the car-park scene, and
+illustrating how the pattern of active goals changes over time as the
+agent moves through the scene is available here: <a href =
+"http://www.comp.leeds.ac.uk/vision/movies/sidebyside.avi">24MB AVI
+file</a>. In this movie, areas accessible by progressively higher
+levels of sub-goal are shown in progressively darker shades of
+grey.</p>
+
+<h2>Using psychologically inspired navigational strategies</h2>
+
+<p>The second investigation into intentionality within computer vision
+involves the use of psychologically inspired models of human
+navigation to work out where the agents in the scene might be going.
+The two models investigated so far are <i>shortest path</i> and
+<i>simplest path</i>. The shortest path model of navigation predicts
+that people will take the geographically shortest route from their
+current location to their goal, and the simplest path model predicts
+that they will take the path made up of the smallest number of
+straight line segments. We presented this work at the workshop
+<i>Visual Surveillance</i> 2006 under the title "Navigational
+Strategies and Surveillance <a href =
+"http://www.comp.leeds.ac.uk/hannah/papers/vs06.pdf">PDF link</a>.
+
+<p>The algorithm can be summarised as
+follows:</p>
+
+<ol>
+<li>Work out all possible paths to known goal sites.</li>
+<li>Find the closest path in space using the Monotonic Hausdorff
+distance.</li>
+<li>Work out how closely the agent is following that path using a
+measure based upon angular disparity.</li>
+</ol>
+
+<P>Each of these steps is dealt with in more detail below.</p>
+
+<p><b>1:</b> Work out all possible paths <b>to</b> the goals in the scene
+<b>from</b> the agent's current location (according to either the shortest path
+or the simplest path model). This is done in a similar way to the sub-goal
+calculation in the online algorithm. The images below show all paths for a
+sample agent.</p>
+
+<table><tr>
+<td><img src = "allshorob22.png" alt = "all shortest paths for example agent"></td>
+<td><img src = "allsimpob22.png" alt = "all simplest paths for example agent"></td>
+</tr>
+<tr>
+<td>All shortest paths for Agent 22, car-park dataset. This can be
+thought of as a tree of possible future routes through the scene. Note
+that the "trunk" of the tree starts shortly after the agent's
+trajectory - this delay allows time for the Kalman filter's direction
+estimate to stabilise.</td>
+<td>All simplest paths for the same agent. Some of the simplest paths
+are the same as the corresponding shortest paths.</td>
+</tr>
+</table>
+
+<p><b>2:</b> When the trajectory ends and the agent has left the scene, work
+out which of these paths is closest to the agent's trajectory
+according to the <i>Monotonic Hausdorff Distance</i> H<sub>m</sub>.
+The Hausdorff distance between two sets of points is a means of
+determining how close in space two point sets are. However, we are
+dealing with trajectories and paths, which have a natural progression
+from point to point, so
+have developed a modification which respects this ordering. 
+The images below show the difference in matched point selection
+between the two methods.</p>
+<table><tr>
+<td><img src = "hausdorff.png" alt="the selection of matched points in the Hausdorff distance"></td>
+<td><img src = "monotonic_hausdorff.png" alt="the selection of matched points in the monotonic Hausdorff distance"></td>
+</tr>
+<tr>
+<td>The selection of points to match in the Hausdorff distance. Note
+that when the trajectory of the agent "doubles back" on itself, close
+matches are chosen as the only criteria for selection is
+distance-based.</td>
+<td>The selection of points in the monotonic Hausdorff distance, in
+which subsequent matched points have to be the same distance or
+farther from the start of the agent's trajectory.
+</td>
+</tr>
+</table>
+
+<p><b>3:</b>Having found the closest path in space, use measures based
+upon angular disparity to determine how closely the agent is following
+that path. Three angular distance measures have been developed so far.
+AD relies on angular disparity, IS on angular disparity but ignoring
+small numbers, and C is a measure that combines angular information
+with information about the relative lengths of trajectory
+segments.</p>
+
+
+<table>
+<tr>
+<td><img src =
+"shob44.png" alt="trajectory and closest matched path for example agent"></td>
+<td><img src = "ob44.png" alt="angular disparity graph for example agent"></td>
+</tr>
+<tr>
+
+<td>Trajectory and closest ideal path for Agent
+44. The trajectory is in black. The ideal path is dark grey (with obstacles in light grey) and
+the subgoals on the ideal path are shown as black dots. </td>
+<td>Corresponding angular disparity graph. Comparing this graph to the
+image above left, segment 1, shown in the graph in red,
+corresponds to the first part of the ideal path (from the yellow mark
+to the top of the central obstacle). Segments 2 and 3 are along the
+top edge of the central obstacle, and segment 4 is the long segment
+leading out to the bottom left of the carpark.  From the angular
+disparity graph it is clear that the agent's trajectory is closer in
+angle to each of these segments in turn. </td></tr>
+</table>
+
+<a name = "#evaluation"></a>
+<h2>A novel approach to the evaluation of interesting event detection software</h2>
+
+
+<p>The paths generated using these methods, and the scores allocated to them,
+seem to agree with our subjective judgements of the routes people are likely to
+take and seem also to provide some measure of how closely the supposed routes
+are being followed. However a more robust form of evaluation is required for us
+to be certain of this.  To this end we have introduced a novel approach to the
+evaluation of behaviour modelling systems, based upon a result from Troscianko
+et al 2004 (<i>What happens next? The predictability of natural behaviour
+viewed through CCTV cameras</i>. Perception 33, 87-101, available in <a href
+="http://psychology.psy.bris.ac.uk/pdfs/tomtroscianko/CCTVpaper.pdf">PDF from
+the University of Bristol</a>). In that paper, Troscianko et al show that when
+it comes to judging what happens in CCTV footage, na&iuml;ve subjects perform
+just as well if not better than trained CCTV operatives. As our algorithms
+perform a similar job - determining how goal-directed a person's activity is -
+we use a group of na&iuml;ve observers to provide a benchmark against which we
+can measure the software performance. This is a kind of <i>ground truth</i> for
+interestingness.  The work described in this section is covered in more depth
+in our PETS 2004 paper "Is it Interesting?: Comparing human and machine
+judgements on the PETS dataset" <a href =
+"http://www.comp.leeds.ac.uk/hannah/papers/pets2004.pdf">PDF link</a>.</p>
+
+<p>To obtain this <i>ground truth</i> we show video clips of each agent to a
+number of volunteers, and get them to rate on a scale of 1 to 5 how interesting
+that behaviour pattern would be to a security guard. The resulting ranks can
+then be used with non-parametric correlation statistics such as Kendall's Tau
+or Spearman's Rho to determine how our software scores of intentionality
+compare to the human judgements of interestingness. In all cases, the
+correlations are very strong (greater than 0.5%). The images below show the
+correlations (click for larger versions). </p>
+
+<table>
+<tr>
+<td>
+<a href ="mean_corr_carpark_big.png"><img src = "mean_corr_carpark.png" alt="mean correlations, carpark dataset"></a>
+</td>
+<td>
+<a href = "mean_corr_pets_big.png"><img src = "mean_corr_pets.png" alt = "mean correlations, pets dataset"></A>
+</td>
+</tr>
+<tr>
+<td>Correlations between the various angular distance based metrics
+and the mean human ranking for the car-park dataset.
+</td>
+<td>Same correlations for the PETS dataset. The PETS dataset has lower
+levels of correlation than the car-park dataset, but the results are
+still highly significant (0.5%).
+</td>
+</tr>
+</table>
+
+<p>The strengths of these resulting correlations tell us some interesting
+things. The online algorithm and navigational strategies algorithm perform
+comparably. Within the navigational strategies framework, the IS distance
+measure agreed most strongly with the human volunteers. The "shortest path"
+planning strategy consistently performed as well as or better than "simplest
+path", which may provide evidence that this strategy is preferred, as
+psychologists suggest. Whether the techniques described here could be a new
+means for carrying out naturalistic experiments into human path planning
+strategies is a matter for future resesarch.</p>
+
+<a name ="#surveillance"></a>
+<h2>Specific surveillance applications</h2>
+
+<p>Some preliminary experiments have been carried out with
+thresholding on the online algorithm scores to detect particular
+events. These are presented in the AVSS-2005 paper <a href =
+"http://www.comp.leeds.ac.uk/hannah/papers/avss.pdf">PDF link</a>.
+
+<a name ="#publications"></a>
+<h2>Related Publications</h2>
+<p>There are a number of conference papers on this work:</p>
+<ul>
+<li>Dee, H. M.; Hogg, D. C. <i><a href =
+"http://www.comp.leeds.ac.uk/hannah/papers/vs06.pdf">Navigational strategies and surveillance</a></i> in:
+<b>Proceedings of the IEEE International Workshop on Visual
+Surveillance (ECCV-VS)</b>, pp. 73-81 IEEE Computer Society Press.
+2006.</li>
+
+<li>Dee, H. M.; Hogg, D. C. <i><a href = "http://www.comp.leeds.ac.uk/hannah/papers/avss.pdf">On the
+feasibility of using a cognitive model to filter surveillance data</a>
+</i> in: <b>Advanced Video and Signal based Surveillance</b>
+September 2005, Como, Italy.</li>
+
+<li>Dee, H. M; Hogg, D. C. <i><a href = "http://www.comp.leeds.ac.uk/hannah/papers/bmvc2004.pdf">Detecting
+inexplicable behaviour</a></i> in:
+<b>British Machine Vision Conference 2004</b>, pp. 477-486 BMVA.
+2004.</li>
+
+<li>Dee, H. M.; Hogg, D. C. <i><a href = "http://www.comp.leeds.ac.uk/hannah/papers/pets2004.pdf">Is it
+Interesting?: Comparing human and machine judgements on the PETS
+dataset</a></i> in: <b>Proceedings of the Performance Evaluation of
+Tracking And Surveillance workshop (PETS2004) at the European
+Conference on Computer Vision</b>, pp 49-55.  2004.  </li>
+</ul>
+<p>A journal paper is in preparation, and there is also a thesis:</p>
+<ul>
+<li>Dee, H. M. <i><a href
+="http://www.comp.leeds.ac.uk/research/pubs/theses/dee.pdf">
+Explaining visible
+behaviour</a></i> University of Leeds, 2005.</ul>
+
+<h2>Links</h2>
+<a name ="#links"></a>
+
+<p><a href="http://www.comp.leeds.ac.uk/vision/cogvis">The Cognitive Vision (CogVis) Project</a></p>
+
+<p><a href="http://www.comp.leeds.ac.uk/vision">Vision Group Webpage</a></p>
+
+<p><a href="http://www.comp.leeds.ac.uk/">The School of Computing</a></p>
+
+<p><a href="http://www.engineering.leeds.ac.uk/cgi-bin/sis/eng/ext/programme.cgi?cmd=details&level=pg&progcode=MSC-CGS-FT">MSc in Cognitive Systems</a>
+
+<p><a href="http://www.leeds.ac.uk/">The University of Leeds</a></p>
+<!--#include virtual="/vision/WEB_end.html" -->
