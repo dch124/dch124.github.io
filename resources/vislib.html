@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>VISLIB - SCS Vision Group Resource Library</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.0b5aGold (X11; I; IRIX 5.3 IP22) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#F1F8F1">
+
+<P><!! ----------------------------------------------------------------------- !!><A HREF="../welcome.html"><IMG SRC="images/home.gif" ALT="VG Home Page, " BORDER=2 HEIGHT=15 WIDTH=15></A><A HREF="../equipment/index.html"><IMG SRC="images/prev.gif" ALT="Equipments, " BORDER=2 HEIGHT=15 WIDTH=15></A><A HREF="../resources/links.html"><IMG SRC="images/next.gif" ALT="Links, " BORDER=2 HEIGHT=15 WIDTH=15></A><!!! <A HREF="../help.html"><!!! <IMG ALT="Help" src="images/help.gif" WIDTH=15 HEIGHT=15><!!! </A>
+<HR><!! ----------------------------------------------------------------------- !!></P>
+
+<TABLE BORDER=0 CELLPADDING=10>
+<TR>
+<TD>
+<P><IMG SRC="img/vg-lg-s.gif" ALT="" ALIGN=LEFT></P>
+</TD>
+
+<TD>
+<CENTER><P><B><FONT SIZE=+3>VISLIB - Vision Group Resource Library </FONT></B></P></CENTER>
+</TD>
+</TR>
+</TABLE>
+
+<P>This page describes the software resources that are contained in the
+VISLIB user space. Other school resources are available in xtools. PS.
+I'm still working on this... </P>
+
+<H2>
+<HR width="100%"></H2>
+
+<H2>Introduction</H2>
+
+<P>VISLIB is a suite of resources for use by the Leeds University Vision
+Group members. It lives in the user space <TT>~vislib</TT> on both the
+DCRE and SGI networks. It contains applications, tools, libraries, source
+code, information and data which is (or may one day be, or may once have
+been) of use to Vision Group members. VISLIB is maintained collectively
+by group members. </P>
+
+<H2>Organization</H2>
+
+<P>VISLIB has user space on both DCRE and the SGI network, both as <TT>~vislib</TT>.
+The DCRE account currently has 130Mb and the SGI account has 40Mb. The
+structure of both accounts is very similar (and in many places identical
+- by use of symbolic links); however, the DCRE account is geared towards
+IRIX 5.3/IRIX 6 and the SGI account is geared towards IRIX 4.</P>
+
+<P>Both accounts has the following structure:</P>
+
+<PRE>~vislib ----- src
+          |-- bin
+          |-- lib
+          |-- include
+          |-- tmp
+          |-- demos
+          |-- data
+          |-- docs
+          |-- man
+          --- WWW
+</PRE>
+
+<P>The directories shown above have the following uses:</P>
+
+<P><B><TT>src</TT></B> is for source code (and associated materials) of
+applications, tools and libraries. There is a separate subdirectory for
+each app/tool/lib, and the general idea is that each app/tool/lib should
+`live' here, and be compiled here, and the <TT>bin</TT>, <TT>lib</TT> and
+<TT>include</TT> directories should just contain symbolic links to the
+relevant executables/libraries/header files.</P>
+
+<P><B><TT>bin</TT></B> is for executables (IRIX 5/6 for DCRE, IRIX 4 for
+SGI). These either exist directly in <TT>bin</TT> or, more commonly, as
+symbolic links to files under <TT>src</TT>. <TT>bin</TT> is unstructured
+(no, or very few subdirectories) so that users can easily access executables
+simply by putting <TT>~vislib/bin</TT> in their search path. This has the
+side effect of making the directory very crowded and unreadable. It should,
+however, be possible to work out what a particular executable is by looking
+as what its symbolic link is (using <TT>ls -l</TT>). For example if I notice
+that mr_<TT>slicer</TT> is a link to <TT>../src/mrutils/process_utils/slicer</TT>,
+I know that it must be some kind of magnetic resonance image utility.</P>
+
+<P><B><TT>lib</TT></B> is for stand alone (<TT>.a</TT>) and shared (<TT>.so</TT>)
+libraries. Again these are mostly symbilic links to the physical files
+under the <TT>src</TT> directory. Libraries are also generally OS specific,
+so expect differences between the DCRE and SGI versions of this directory.</P>
+
+<P><B><TT>include</TT></B> is for header (<TT>.h</TT>) files. Mostly symbolic
+links again.</P>
+
+<P><B><TT>tmp</TT></B> is a temporary directory for newly-installed stuff.
+The idea is that if you want to download something and try it out you can
+put it in here. When you've evaluated whether it's any use or not you can
+either delete it or install it properly under <TT>src</TT>, document it
+(add it to the list on this page, and make <TT>README</TT> files), and
+tell everyone that it's available and how useful it is.</P>
+
+<P><B><TT>archive</TT></B> is for old stuff that I'm not sure what it's
+for or if anyone uses it.</P>
+
+<P><B><TT>demos</TT></B> contains demos of the work of Vision Group members.
+This is to allow people's work to be shown to visitors even if they're
+not there.</P>
+
+<P><B><TT>data</TT></B> is for vision-related data. Qualifying categories
+are images, volumetric data, video sequences, etc etc. Most data will be
+specific to one person and as such should be kept in their own user space.
+Stuff in here is either shared data or data that's too big for people's
+own user space.</P>
+
+<P><B><TT>docs</TT></B> is for useful documents or information. This is
+<I>not</I> for documentation of the apps/libs kept in VISLIB - this should
+be kept with the source code, as this is where users would naturally look
+for it. In fact, I don't think there will be much stuff in here at all,
+since most stuff will be in <TT>WWW</TT>.</P>
+
+<P><B><TT>man</TT></B> is for man pages. Again, not many of these.</P>
+
+<P><B><TT>WWW</TT></B> is for any web stuff (including this page, and the
+Vision Group home page).</P>
+
+<P>Every directory should have a <TT>README</TT> or <TT>CONTENTS</TT> file
+included which gives a short description of what the directory contains,
+and more importantly, <I>who owns or maintains it</I>. This is essential
+in order to keep VISLIB in some kind of order, as the biggest problem with
+tidying it up has definitely been finding out who uses what.</P>
+
+<H2>Using VISLIB Utilities</H2>
+
+<P>To give yourself easier access to the utils in VISLIB, you can set up
+your environment in certain ways. </P>
+
+<UL>
+<LI>Set your PATH variable to include ~vislib/bin. Do this using <TT>setenv
+PATH ~vislib/bin:$PATH</TT> Add the above line to your <TT>.cshrc</TT>
+file for a more permanent change. </LI>
+
+<LI>Include ~vislib/man in your search for man pages. Don't know how to
+do this - if anyone else does, please fill in here. </LI>
+</UL>
+
+<H2>Contents</H2>
+
+<P>There now follows a list of what's currently installed/available in
+VISLIB, along with a few brief descriptions here and there. </P>
+
+<H3>Info/Docs</H3>
+
+<H4>Rosenfeld's Computer Vision Bibliographies</H4>
+
+<P><TT>docs/Rosenfeld/*</TT></P>
+
+<P>These are comprehensive bibliographies of computer vision papers published
+year by year. They're also available on the Web.</P>
+
+<H3>Applications</H3>
+
+<H4>Image/Movie Format Conversion Utilities</H4>
+
+<P><TT>bin/{*2*, *to*}</TT></P>
+
+<P>Convert various image and movie formats. There are loads more of these
+in <TT>~xtools/pbmplus</TT>.</P>
+
+<H4>MRI Viewer and Utilities</H4>
+
+<P><TT>bin/mr_*</TT></P>
+
+<P>Used to view (<TT>mr_viewer</TT>) and manipulate (the others) MR volume
+images held in <TT>data/mrimages</TT>. The source for the viewer is closely
+guarded by Andy Bulpitt. The source for the utils is in <TT>src/mrutils/view_utils</TT>.</P>
+
+<H3>Libraries</H3>
+
+<H4>Lapack and Lapack++ matrix/linear algebra libraries</H4>
+
+<P><TT>lib/{liblapack.a, liblapack++.a, libblas++.a}, include/lapack++.h</TT></P>
+
+<P>Very comprehensive matrix classes, using the BLAS fast algebra routines.
+If you read the user manual, it sounds really impressive. If you want to
+use it, ask Tony Heap for help - he has a little experience in it. Try
+reading the <A HREF="http://unix.hensa.ac.uk/netlib/c++/lapack++/index.html">user
+manual</A>.</P>
+
+There is a simple test program in ~vislib/src/lapack++/vislib_tests which
+shows you how to use lapack++. The associated makefile shows how to compile.
+
+<H4>Octave</H4>
+
+<P><TT>lib/{liboctave.a, libcruft.a}, include/octave/*.h</TT></P>
+
+<P>Some maths package. No idea what it does. If you know, please fill it
+in here and say whether it's any good.</P>
+
+<P><B>AMB's home-grown matrix class library</B></P>
+
+<P><TT>lib/libmatrix.a, include/{NagMatrix.h, NagVector.h}</TT></P>
+
+<P>Home-grown C++ matrix and vector classes, written by Adam Baumberg.
+Used by his image classes, but also useable in their own right.</P>
+
+<p><b>AJH's home-grown matrix class library</b>
+
+<p>
+<tt>lib/libajhmatrix.a, include/{ajhmatrix.h}</tt>
+
+<p>Tony Heap's matrix class. For example code see <tt>/src/ajhmatrix</tt>.
+
+<H4>AMB's home-grown image class library</H4>
+
+<P><TT>lib/libis.a, include/image_class/*.h</TT></P>
+
+<P>Home-grown image classes, written by Adam Baumberg. Handle all aspects
+of image manipulation, including capture from Indycam/external camera/MPEG
+stream, processing (thresholding, filters, differencing etc) and output
+to screen. Copes with full colour, black and white, YUV - you name it,
+it does it. All that's needed is some documentation and a few sample programs
+that new users could take and easily hack about with.</P>
+
+<H3>Report Writing Utilities</H3>
+
+<P>Well, there aren't any yet. We wondered whether letter/report templates
+would be useful. What we do have is a nice <A HREF="/home/dream1_a/staff/vislib/WWW/img/vglogo.eps.gz">gzipped
+eps of the Vision Group Logo</A>.</P>
+
+<H3>Demos</H3>
+
+<H4>Handtracker Demo</H4>
+
+<P>Tony Heap's hand tracker software for tracking hands in 2D and 3D. Look
+at the README files for more info, or look at the Hand Tracker <A HREF="http://dream1.leeds.ac.uk/~ajh/tracker.html">Web
+site</A>.</P>
+
+<H4>Pedestrian Behaviour Demos</H4>
+
+<P>Neil Johnson's demos of pedestrian typicality assessment and pedestrian
+trajectory prediction. See the README file for more info.</P>
+
+<H3>Data</H3>
+
+<P>Have a look and find out for yourself! At the moment there are a few
+old movies of cars, and some MR images of hands.</P>
+
+<H2>Maintenance</H2>
+
+<P>VISLIB can and should be maintained by all members of the Vision Group.
+If things are out of date, feel free to update them. If you're going to
+delete anything, mail the group first to check no-one uses it. If you move
+things around or update them or fix them, mail the group afterwards to
+let them know you've done it.</P>
+
+<H2>Adding new stuff</H2>
+
+<P>VISLIB is supposed to provide resources which could be of general use
+to the group, so if you've used something which you think other people
+would benefit from, such as an interface builder or some nice C++ class
+for handling 3D images or whatever, put it in here. Also, if you have any
+good demos of your work they can go in the demos directory, or you could
+alternatvely put them on your homepage.</P>
+
+<P>In order to keep some form of order, try to observe the following guidelines:</P>
+
+<UL>
+<LI>If you're downloading something to try it out, you can put it initially
+in the tmp directory. If it turns out to be naff, delete it.</LI>
+
+<LI>When you install it proper, refer to the use of directories described
+above to make sure you put it in the right place.</LI>
+
+<LI><TT>gzip</TT> large data files, and <TT>strip</TT> and <TT>gzexe</TT>
+large executables to save space.</LI>
+
+<LI>Make sure any required symbolic links from the <TT>bin</TT>, <TT>lib</TT>
+and <TT>include</TT> directories are set up. If executables have particularly
+common names it might be an idea to give them a prefix to put them in context,
+eg. all the MRI utils in <TT>bin</TT> are prefixed with <TT>mr_</TT>, so
+<TT>flip</TT> has become <TT>mr_flip</TT>, which is more helpful.</LI>
+
+<LI>Put a README or CONTENTS file in every directory you create, saying
+what it it and who installed it (ie. you).</LI>
+
+<LI>Put a short description of it in the Contents section above. If you
+downloaded it, include any links to wherever you got it from. If it's homegrown,
+and you're feeling energetic, write a Web page describing it.</LI>
+
+<LI>Mail the group members to tell everyone about the great new thing you've
+installed!</LI>
+</UL>
+
+<P>If disk space is running short you can apply to get some more. This
+is best done through official channels (go through David or Roger).</P>
+
+<P>Any major changes to the structure of the user space should probably
+be discussed with everyone else first.</P>
+
+<H2>Other Useful Resources</H2>
+
+<P>within the school...</P>
+
+<P>xtools</P>
+
+<P>pgdoc</P>
+
+<P>outside the school...</P>
+
+<P>Hensa archive.</P>
+
+<P>
+<HR width="100%"></P>
+
+<P><I>Document prepared by Tony Heap (ajh@comp.leeds.ac.uk) on 2nd July
+1996.</I></P>
+
+<P><!! ----------------------------------------------------------------------- !!>
+<HR><A HREF="../welcome.html"><IMG SRC="images/home.gif" ALT="VG Home Page, " BORDER=2 HEIGHT=15 WIDTH=15></A><A HREF="../equipment/index.html"><IMG SRC="images/prev.gif" ALT="Equipments, " BORDER=2 HEIGHT=15 WIDTH=15></A><A HREF="../resources/links.html"><IMG SRC="images/next.gif" ALT="Links, " BORDER=2 HEIGHT=15 WIDTH=15></A><!!! <A HREF="../help.html"><!!! <IMG ALT="Help" src="images/help.gif" WIDTH=15 HEIGHT=15><!!! </A><!! ----------------------------------------------------------------------- !!>
+<HR><I><A HREF="http://www.comp.leeds.ac.uk">School of Computing</A>,
+<A HREF="http://www.leeds.ac.uk">University of Leeds</A> </I><!! ----------------------------------------------------------------------- !!>
+<HR></P>
+
+</BODY>
+</HTML>
