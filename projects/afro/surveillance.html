@@ -1,0 +1,82 @@
+
+<HTML>
+<HEAD>
+<link rel="stylesheet" type="text/css" href="../../vision.css">
+  <meta name="Author" content="Aphrodite Galata">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<TITLE> Aphrodite Galata: Research Page </TITLE>
+<!-- Changed by: A Galata (CoMIR),  1-Nov-1996 -->
+</HEAD>
+
+<!<BODY bgcolor=#D8D8BF background="images/af_back.jpg"> 
+<body class="body">
+<BODY>
+
+
+
+<br>
+<br>
+<p>
+
+<center><h2> Modelling Interaction Using Learnt Qualitative Spatio-Temporal 
+Relations and Variable Length Markov Models </h2></center>
+<br>
+
+<p>
+
+<center> <h2> Summary </h2> </center>
+
+<p>
+
+Motivated by applications such as automated visual surveillance and video
+monitoring and annotation, we are interested in constructed cognitive vision
+systems capable of interpreting the high level semantics of dynamic scenes.<br>
+<br>
+In this work, we present a novel approach for automatically inferring
+models of object interaction that can be used to either
+(i) interpret observed behaviour or (ii) predict future behaviour within a 
+scene.<br>
+<br>
+Previous work has generally selected in advance which types of behaviour to
+model/recognise. However the aim of this work is not to predetermine these activities but to learn them automatically. For this reason a data driven approach
+is taken where models of interactive object behaviour are learned through observation without assumption of prior knowledge. This removes the need for costly hand crafted knowledge whereas learning discovers stochastic models of behaviour that reflect the structure of sample behaviours.<br>
+<br>
+Experiments have been performed within the traffic monitoring domain, however 
+the proposed method is applicable to the general surveillance task.<br>
+<br>
+Our to learning models of object interactions involves first a process of inferring discrete and abstract representations (or symbols) of primitive object interactions. Effectively, we learn a set of qualitative spatial relations relevant to the dynamic behaviour of the domain.
+
+
+<br>
+<blockquote>
+<p>
+<br><center><img border=1 align=center width=265 height=268 src="organised_proto12.bmp"> </center><br>
+<center>Figure 1: Learnt primitive interactions - traffic domain example.
+The two dots represent pairs of close vehicles (distinguished by the size of the dot -- the larger dot being the reference vehicle). The arrows show their direction of movement and the connecting vector their relative orientation and distance.
+These patterns represent typical``midpoints'' as result of clustering the input data into <i>n</i>  different conceptual ``regions''.</center>
+<br>
+</blockquote>
+<br>
+These primitive interactions  are then used as an alphabet to infer the high level structure of typical interactive behaviour within a scene. We achieve this 
+by using a variable lenght Markov model (VLMM)
+to efficiently encode the sequences of learnt primitive interactions corresponding to observed interactive behaviour within the scene. The inferred behaviour model has generative capabilities and is also capable of recognizing typical or atypical activities within a scene. <br>
+
+<br><center><img border=1 src="outimage180.jpg"> <img border=1 src="outfile0087.jpg" > </center><br> <br><center>(<a href="movies/interact_predict2.mpg"> movie 1 </a>)        (<a href="movies/objinter_predict2.mpg"> movie 2 </a>)  </center><br> 
+<center>
+Figure 2: illustrates the maximum likelihood prediction of future behaviour at a selected time instant. An individual object behaviour model has been learned in addition to the interactive behaviour model described above. The blue 
+line illustrates maximum likelihood prediction of a car using only the object 
+behaviour model. The pink line illustrates maximum likelihood prediction taking into account the learnt interactive behaviour model.</center> 
+</center>
+<br>
+<p>
+
+For more details see:<br> 
+<blockquote>
+A. Galata, A. G. Cohn, D. Magee and D. Hogg, <i> Modeling Interaction Using Learnt Qualitative Spatio-Temporal Relations and Variable Length Markov Models,</i><b> In  Proc. European Conference on Artificial Intelligence (ECAI), ECAI'02,</b>, </i> July 2002 (<a  href="galataECAI02.pdf"> .pdf</a>).   <br>
+</blockquote>
+
+Last update was on February 2003 
+
+</BODY>
+
+</HTML>

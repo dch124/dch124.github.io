@@ -1,0 +1,59 @@
+<html>
+                                                                                
+<head>
+<link rel="stylesheet" type="text/css" href="../../vision.css">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Research Projects</title>
+</head>
+                                                                                
+<body class="body">
+                                                                                
+<p align="center">
+<br>
+</p>
+
+<center><h2>The Acquisition and Use of Interaction Behaviour Models</h2></center>
+                                                                                
+<p> <br> </p>
+<center> <h2> Summary </h2> </center>
+                                                                                
+<p> The focus of this research is to acquire models of interaction  
+automatically by observing interactions between humans. The acquired model 
+can then be used to enable interaction between a human  and a synthetic 
+interactive partner.</p>
+
+<p>In this first experiment, two individuals shaking hands are observed in 
+side view.  A large video corpus of typical handshake interactions has 
+been used and training data has been extracted automatically by tracking 
+individuals and representing them by their profiles. We are considering 
+interaction as a joint behaviour between humans, therefore 
+interaction is represented as the joint behaviour of object silhouettes.
+A large set of prototypes is used to form a representation of the 
+joint behaviour space where each of these prototypes represents 
+interaction over an extended time period. An individual prototype 
+is not generative. It is a compressed representation of interaction 
+(encoding temporal history) and in order to be used generatively
+for prediction we connect the prototypes into a Markov
+chain.</p>
+                                                                                
+<p>Having acquired the behaviour model, a stochastic algorithm (based on Isard and Blake Condensation algorithm) has been used to propagate multiple 
+hypothesis through the behaviour model. The maximum likelihood interaction 
+hypothesis provides a natural response to the humans actions. </p>
+
+A short movie demonstrating virtual interaction can be seen below
+
+<br>
+
+<p align="center"><a href="movies/handshake.mov"><img src="handshake.jpg" width="256" height="192" border="0"></a></p>
+<p>For more details see:</p>
+<blockquote> 
+  <p>Johnson, N., A. Galata, D. Hogg (1998). The Acquisition and Use of Interaction 
+    Behaviour Models. IEEE Computer Vision and Pattern Recognition (CVPR'98), 
+    Santa Barbara, IEEE Computer Society Press (<a href="cvpr98.pdf">.pdf</a>).</p>
+</blockquote>
+
+Last update was on January 1999
+</body></html>
