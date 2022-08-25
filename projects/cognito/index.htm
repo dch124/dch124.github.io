@@ -1,0 +1,142 @@
+<html><head><title>Computer Vision - University of Leeds - Activity Monitoring and Recovery</title>
+
+<link rel="stylesheet" href="http://www.comp.leeds.ac.uk/vision/simple.css"> 
+
+<style type="text/css">
+.pdf-link {
+ background-position: right;
+ background-repeat: no-repeat;
+ background-image: url("pdf-document.png");
+ padding-right: 20px;
+}
+</style>
+
+</head>
+
+<body style="margin-left: 4em; margin-right: 4em; margin-top: 3em">
+
+<div style="text-align: left">
+
+<center><h1><a href="http://www.ict-cognito.org">COGNITO:</a> Activity Monitoring and Recovery</h1></center>
+<h3 style="font-size: 80%; text-align: left;"><a href="https://www.edgehill.ac.uk/computerscience/academic-staff/ardhendu-behera/">Ardhendu Behera</a>,
+<a href="http://www.comp.leeds.ac.uk/dch">David Hogg</a> and <a href="http://www.comp.leeds.ac.uk/agc">Anthony Cohn</a></h3>
+<div style="text-align: justify;">
+The goal of this work is to recognize egocentric
+atomic events in real-time. The atomic events are characterised
+in terms of binary relationships (<i>bag-of-relations</i>) between parts of the body and manipulated
+objects. The key contribution is to summarise, within a histogram,
+the relationships that hold over fixed time interval. This histogram is
+then classfied into one of a number of atomic events. The relationships
+encode both the types of body parts and objects involved (e.g. wrist,
+hammer) together with a quantised representation of their distance apart
+and the normalised rate of change in this distance. The quantisation and
+classifier are both configured in a prior learning phase from training data.
+<div>
+   <center><img src="cognito_original.png", width="850" ></center>
+ 
+    Overview of our hierarchical framework: atomic events <i>e</i> are inferred using
+spatiotemporal pairwise relations <i>r</i> from observed objects and wrists, and relations between body parts (<i>elbow-shoulder </i>
+ and <i>shoulder-torso</i>) using inertia sensors (IMU). Activities <i>y</i> are represented as a set of temporally-consistent <i>e</i>.
+  
+</div>
+<h2>Motivation</h2>
+Most of the existing approaches for activity recognition are designed to
+perform after-the-fact classification of activities after fully
+observing videos of single activity. Moreover, such systems usually expect that the
+same number of people or objects are observed over the entire activity whilst in
+realistic scenarios often people and objects enter/leave the scene while activity is
+going on. 
+<p>
+There are three main objectives of the proposed activity recognition system: 1) to recognise the current event from a short
+observation period (typically two seconds); 2) to anticipate the most probable
+event that follows on from the current event; 3) to recognise activity deviations.
+</p>
+<h2>Publications</h2>
+<p>
+<table>
+<tr><td>
+A. Behera, D. C. Hogg and A. G. Cohn, Egocentric Activity Monitoring and Recovery (ACCV 2012).
+<a class="pdf-link" href="PaperAccv2012.pdf">pdf</a>
+<br><br>Demos: <a href="bottles_packaging.avi">labeling and packaging bottles</a> and 
+<a href="hammering_nails_driving_screws.avi">hammering nails and driving screws</a>
+</td>
+<td><a href="accv12.pdf"><img style="border: 0" src="poster.png", height="80"></a><br><center>poster</center></td>
+</tr></table>
+</p>
+<p>
+A. Behera, A. G. Cohn, D. C. Hogg. Workflow Activity Monitoring using the Dynamics of Pair-wise Qualitative 
+Spatial Relations. International Conference on MultiMedia Modeling (MMM 2012) (<font color="red">Oral</font>).
+<a class="pdf-link" href="mmm2012_behera_workflow.pdf">pdf</a>
+<br><br>Demos: <a href="driving_screws.avi">driving screws</a> and 
+<a href="hammering_nails.avi">hammering nails</a>
+</td>
+</p>
+<p>
+<table>
+<tr><td>
+S. F. Worgan, A. Behera, A. G. Cohn, D. C. Hogg. Exploiting petri-net structure for activity 
+classification and user instruction within an industrial setting. 
+International Conference on Multimodal Interaction (ICMI 2011).
+<a class="pdf-link" href="icmi244-beheraPS.pdf">pdf</a></td>
+<td><a href="icmi2011_poster.pdf"><img style="border: 0" src="icmi_poster.png", height="80"></a><br><center>poster</center></td>
+</tr></table>
+</p>
+<h2>Datasets</h2>
+In order to test our hierarchical framework, we have obtained two datasets using
+an egocentric setup. These datasets consist of non-periodic manipulative tasks
+in an industrial context. All the sequences were captured with on-body sensors
+consisting IMUs, a backpack-mounted RGB-D camera for top-view and a chestmounted 
+fisheye camera for front-view of the workbench. 
+<p>
+The first dataset is the scenario of <i>hammering nails and driving screws</i>. 
+In this dataset, subjects are asked to hammer 3 nails and drive 3 screws
+using prescribed tools.
+</p>
+<p>
+The second dataset is a <i>labelling and packaging bottles</i> scenario. In this
+dataset, participants asked to attach labels to two bottles, then package them
+in the correct positions within a box. This requires opening the box, placing
+the bottles, closing the box, and then writing on the box as completed using a
+marker pen.
+</p>
+<h3>Hammering three nails and driving three screws</h3>
+<table width=100% align=center>
+<tr>
+<td><img src = "nails_top_view_1.png", width="200"></td>
+<td><img src = "nails_top_view_2.png", width="200"></td>
+<td><img src = "nails_chest_view_1.jpg", width="200"></td>
+<td><img src = "nails_chest_view_2.jpg", width="200"></td>
+</tr></table>
+Snapshots from the dataset. The first two images of are from
+the top view (RGB-D) and the last two are from the chest-view fisheye camera.
+<p>
+The dataset consists of videos from both views, object tracklets (3D positions), upperbody model (IMU) and ground-truth.
+The <a href="nails_screws_top_view.zip">top view video sequences</a> (~0.7 GB) and <a href="nails_screws_front_view_fisheye.zip">front 
+view sequences</a> (~0.6 GB) are available.
+Object and wrist tracklets, and IMU data (upperbody model) and activity labels are available <a href="Nails_screws_processed_data.zip">here</a> (~80MB).
+<h3>Labelling and packaging bottles</h3>
+<table width=100% align=center>
+<tr>
+<td><img src = "package_top_view_1.png", width="200"></td>
+<td><img src = "package_top_view_2.png", width="200"></td>
+<td><img src = "packaging_chest_view_1.jpg", width="200"></td>
+<td><img src = "packaging_chest_view_2.jpg", width="200"></td>
+</tr></table>
+Snapshots from the dataset. The first two images of are from
+the top view (RGB-D) and the last two are from the chest-view fisheye camera.
+<p>
+The dataset consists of videos from both views, object tracklets (3D positions), upperbody model (IMU) and ground-truth.
+The top view video sequences and the activity labels are available <a href="packaging_top_view_and_label.zip"> here</a> (~1.7 GB).
+Objects and wrist tracklets, and IMU data (upperbody model) can be found <a href="Packaging_processed_data.zip"> here</a> (~100MB).
+
+<h2>Acknowledgement</h2>
+This research work is supported by EU FP7 (ICT Cognitive
+Systems and Robotics) grant on <a  href="http://www.ict-cognito.org">COGNITO</a> (ICT-
+248290) project. We also thank our collaborators at the <a  href="http://www.ict-cognito.org">COGNITO</a> partners.
+</div>
+
+
+</div>
+<div style="text-align:right; font-size:50%; color: gray;">0.3</div>
+
+</body></html>
