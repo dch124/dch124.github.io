@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN">
+<!--Converted with LaTeX2HTML 96.1-f (May 31, 1996) by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds -->
+<HTML>
+<HEAD>
+<TITLE>Improving Specificity in PDMs  using a Hierarchical Approach</TITLE>
+<META NAME="description" CONTENT="Improving Specificity in PDMs  using a Hierarchical Approach">
+<META NAME="keywords" CONTENT="hpaper">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<LINK REL=STYLESHEET HREF="hpaper.css">
+</HEAD>
+<BODY LANG="EN">
+ <A NAME="tex2html13" HREF="node1.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://cbl.leeds.ac.uk/nikos/figs/next_motif.gif"></A> <A NAME="tex2html11" HREF="../index.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://cbl.leeds.ac.uk/nikos/figs/up_motif.gif"></A> <IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://cbl.leeds.ac.uk/nikos/figs/previous_motif.gif">   <BR>
+<B> Next:</B> <A NAME="tex2html14" HREF="node1.html">1 Introduction</A>
+<B>Up:</B> <A NAME="tex2html12" HREF="../index.html">Contents</A>
+<BR> <P>
+<P>
+<H1 ALIGN=CENTER>Improving Specificity in PDMs <BR> using a Hierarchical Approach</H1>
+<P ALIGN=CENTER><STRONG>Tony Heap and David Hogg<BR> 
+  <SMALL CLASS=SMALL>School of Computer Studies,
+  University of Leeds,
+  Leeds, UK, LS2 9JT</SMALL><BR> 
+  <tt><SMALL CLASS=SMALL>ajh@comp.leeds.ac.uk</SMALL></tt></STRONG></P><P>
+<P>
+<H3 CLASS=ABSTRACT>Abstract:</H3>
+<P CLASS=ABSTRACT>The Point Distribution Model (PDM) has proved useful for many
+tasks involving the location and tracking of deformable objects.
+A principal limitation is non-specificity;
+in constructing a model to include all valid
+object shapes, the inclusion of some invalid shapes is unavoidable due to the
+linear nature of the approach.
+<P>
+Bregler and Omohundro&nbsp;[<A HREF="node6.html#bregler94">2</A>] describe a `piecewise linear'
+method for applying
+constraints within model shape space, whereby principal component analysis is
+used on training data clusters in shape space to
+generate lower dimensional overlapping subspaces. Object
+shapes are constrained to lie within the union of these subspaces,
+thus improving the specificity of the model.
+<P>
+This is an important development in itself, but its most useful
+quality is that it lends itself to automated training. Manual
+annotation of training examples has previously been necessary to
+ensure good specificity in PDMs, requiring expertise and time,
+and thus limiting the amount of training data that can
+feasibly be collected. The use of shape space constraints means
+that such accurate annotation is unnecessary, and automated training
+becomes significantly more successful.
+<P>
+In this paper we expand on Bregler and Omohundro's work, suggesting an
+alternative representation for the linear pieces, and showing how
+a two-level hierarchy in shape space can be used to improve efficiency
+and reduce noise.
+We perform an evaluation on both synthetic and (automatically
+trained) real models.
+<P>
+</P><P>
+<BR> <HR>
+<UL><A NAME="CHILD_LINKS">&#160;</A>
+<LI> <A NAME="tex2html15" HREF="node1.html#SECTION00010000000000000000">1 Introduction</A>
+<LI> <A NAME="tex2html16" HREF="node2.html#SECTION00020000000000000000">2 The Point Distribution Model</A>
+<LI> <A NAME="tex2html17" HREF="node3.html#SECTION00030000000000000000">3 A Hierarchical PDM</A>
+<LI> <A NAME="tex2html18" HREF="node4.html#SECTION00040000000000000000">4 Evaluation</A>
+<LI> <A NAME="tex2html19" HREF="node5.html#SECTION00050000000000000000">5 Conclusions</A>
+<LI> <A NAME="tex2html20" HREF="node6.html#SECTION00060000000000000000">References</A>
+<LI> <A NAME="tex2html21" HREF="node7.html#SECTION00070000000000000000">  About this document ... </A>
+</UL>
+<HR><A NAME="tex2html13" HREF="node1.html"><IMG WIDTH=37 HEIGHT=24 ALIGN=BOTTOM ALT="next" SRC="http://cbl.leeds.ac.uk/nikos/figs/next_motif.gif"></A> <A NAME="tex2html11" HREF="../index.html"><IMG WIDTH=26 HEIGHT=24 ALIGN=BOTTOM ALT="up" SRC="http://cbl.leeds.ac.uk/nikos/figs/up_motif.gif"></A> <IMG WIDTH=63 HEIGHT=24 ALIGN=BOTTOM ALT="previous" SRC="http://cbl.leeds.ac.uk/nikos/figs/previous_motif.gif">   <BR>
+<B> Next:</B> <A NAME="tex2html14" HREF="node1.html">1 Introduction</A>
+<B>Up:</B> <A NAME="tex2html12" HREF="../index.html">Contents</A>
+<P><ADDRESS>
+<I>A J Heap <BR>
+Wed Jul  2 14:34:50 BST 1997</I>
+</ADDRESS>
+</BODY>
+</HTML>
