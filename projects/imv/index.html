@@ -1,0 +1,227 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+
+<html>
+
+<head>
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <meta name="GENERATOR" content="Mozilla/4.5 [en] (Win95; I) [Netscape]">
+
+   <title>Integrated Traffic and Pedestrian Vision System</title>
+
+</head>
+
+<body text="#000000" bgcolor="#F1F8F1">
+
+&nbsp;
+
+<center>
+
+<h1>
+
+An Integrated Traffic and Pedestrian Vision System</h1></center>
+
+
+
+<hr>
+
+<p>This page describes the Integrated Traffic and Pedestrian Vision System
+
+developed by a collaboration between the vision groups at <a href="../welcome.html">Leeds</a>
+
+and <a href="http://www.cvg.cs.reading.ac.uk/">Reading</a> Universities
+
+as part of the EPSRC's IMV program (EPSRC Grant GR/K46620).
+
+<p>The project combines two model-based tracking systems:
+
+<ul>
+
+<li>
+
+Using active shape models to track non-rigid objects, in this case people.
+
+(Leeds)</li>
+
+
+
+<li>
+
+Using geometric 3D models to track rigid objects: in this case cars. (Reading)</li>
+
+</ul>
+
+Mutual occlusion between vehicles and people is handled by passing 2D 'occlusion
+
+masks' between the two systems.
+
+<p>Two complementary approaches for analysing the interactions between
+
+people and vehicles were explored:
+
+<ul>
+
+<li>
+
+At Leeds we have shown how to detect atypical events using features of
+
+the spatio-temporal trajectories of people in relation to vehicles. To
+
+do this, the trajectories of people are compared with a probabilistic model
+
+for the distribution of these features obtained by observing large numbers
+
+of typical interactions.</li>
+
+
+
+<li>
+
+At Reading they have developed a system to produce natural language descriptions
+
+of object interactions using Bayesian belief nets.</li>
+
+</ul>
+
+Heres what Don Braggins had to say about this project in the Oct 97 issue
+
+of Image Processing Europe:
+
+<blockquote>Last Year I reviewed Daniel Crevier's book 'AI - the tumultuous
+
+history of the search for artificial intelligence' in which he relates
+
+how in 1966 Marvin Minsky set a first year undergraduate, Gerald Sussman,
+
+the task of connecting a television camera to a computer and getting the
+
+machine to describe what it saw. He did not succeed, but a joint project
+
+between Prof. David Hogg's group at Leeds University and Dr Tieniu Tan's
+
+at Reading (taking over the reins from the late Geoff Sullivan) comes close
+
+to achieving that goal. They have been able to automatically annotate image
+
+sequences to say, for instance, that 'Pedestrian <i>n</i> is now walking
+
+slowly in front of parked vehicle <i>m</i>' where <i>n</i> and <i>m</i>
+
+are simply the sequential numbers relating to appearance in the scene.
+
+Based on work David Hogg's group has done in finding algorithms to identify
+
+suspicious behaviour in car parks, it should not be long before the annotation
+
+can be extended to say 'Pedestrian <i>n</i> looks about to nick something
+
+out of vehicle <i>m</i> better have a human look at the image on the monitor'.</blockquote>
+
+The work also featured on BBC Look North (30/3/98), Radio 5 Live (30/3/98),
+
+<a href="http://www.telegraph.co.uk:80/et?ac=000647321007942&rtmo=aBhWX5BJ&atmo=99999999&P4%5FFOLLOW%5FON=%2F98%2F4%2F2%2Fecnspy02%2Ehtml&pg=/et/98/4/2/ecnspy02.html">The
+
+Daily Telegraph</a> (2/4/98), OCE magazine. According to BBC breakfast
+
+(23/4/98) we're a 'civil liberties nightmare.'
+
+<br>&nbsp;
+
+<h2>
+
+Fitting models to cars and people</h2>
+
+<img SRC="cool_sml.gif" >
+
+<p><a href="cool.gif">Bigger</a>
+
+<br><a href="viz_partA.mpg">MPEG movie of tracking results (8M)</a>
+
+<br><a href="viz_partA.mpg"><img SRC="mpeg.gif" ></a>
+
+<h2>
+
+The Likelihood of a particular trajectory</h2>
+
+<img SRC="intropic.gif" >
+
+<p><a href="intropic.eps">postscript version</a>
+
+<br><a href="intropic.jpg">Jpeg version</a>
+
+<p><a href="cutup.mpg">MPEG movie (2MB)</a> assessing the likelihood of
+
+a particular trajectories. Dots above the heads indicate likelihood of
+
+a particular trajectory. For this example the positions of cars were estimated
+
+by hand.
+
+<p>
+
+<hr>
+
+<p>There are several other pages mainly meant for internal consumption,
+
+but you may find these of interest.
+
+<ul>
+
+<li>
+
+<a href="http://www.cvg.cs.rdg.ac.uk/~imv">Reading pages about the project</a></li>
+
+
+
+<li>
+
+<a href="publications.html">Publications</a></li>
+
+
+
+<li>
+
+<a href="car_data.html">Leeds output data site</a></li>
+
+
+
+<li>
+
+<a href="leeds_results.html">Leeds tracking results</a></li>
+
+
+
+  <li> <a href="http://www.cvg.cs.rdg.ac.uk/views/home.html">VIEWS</a> Reading work 
+    on which car tracker is based.</li>
+
+</ul>
+
+
+
+<hr>
+
+<table>
+
+<tr>
+
+<td><a href="../welcome.html" LINKCOLOR="#000000"><img SRC="vg-lg-s.gif" ALT=""  align=LEFT></a></td>
+
+
+
+<td>Web page created by Richard Morris
+
+<a href="mailto:rjm@comp.leeds.ac.uk">rjm@comp.leeds.ac.uk</a>
+
+<br>27 March 1998&nbsp;</td>
+
+</tr>
+
+</table>
+
+
+
+</body>
+
+</html>
+

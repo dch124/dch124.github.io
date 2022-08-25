@@ -1,0 +1,162 @@
+<HTML>
+
+<HEAD>
+<title>Reading data page</title>
+
+<HR>
+</HEAD>
+
+<BODY>
+
+<H1>IMV project data page</H1><P>
+<I>Last modified 11:30 03/09/96 </I>
+<H2>Contents</H2>
+<UL>
+<LI> <A HREF="#calibration">Calibration info</A>
+<LI> <A HREF="#data">Data sets</A>
+<LI> <A HREF="#example">Example of blob detection</A>
+<LI> <A HREF="#contact">Contact info</A>
+<LI> <A HREF="leeds_results.html">Tracking results</A>
+</UL>
+
+<H2><A NAME="calibration">Calibration Info</A></H2>
+<H3>Image calibration</H3>
+
+To calibrate the coordinate systems of the 2 frame grabbers, I have chosen
+6 points on a calibration frame containing some fixed points. I have marked
+the points I chose with a red cross and a letter. The coordinate system
+has (0,0) in the bottom left hand corner of the image. You can download the
+<A HREF="spatial_calibration1.gif">orignal calibration frame</A> and the 
+<A HREF="spatial_calibration2.gif">marked frame with crosses</A>.
+<P>
+<img alt="(raw calibration frame)" 
+src="spatial_calibration1.gif" width=240>
+<img alt="(marked calibration frame)" 
+src="spatial_calibration2.gif" width=240>
+<P>
+
+The coordinates are
+<UL>
+<LI> a : 178, 86 
+<LI> b : 89, 104
+<LI> c : 248, 103 
+<LI> d : 158, 120
+<LI> e : 326,  190
+<LI> f : 132,  236
+
+</UL>
+<H3>Time calibration</H3>
+
+The digitised sequence I used has over 15000 frames captured at 25
+frames per second. The frames are labelled 1,2, ... , 15325. <A
+HREF="full_sequence.mpg"> The full 173Meg MPEG is available. </A>
+I have chosen some key frames that correspond to identifiable points
+on the video sequence.
+
+<OL>
+<LI> <B><A HREF="frame.00276.gif">Frame 276</A></B>  <P> 
+<img align=center alt="Key Frame 1" src="frame.00276.gif" width=240>
+<P> The point when a red car (driven by Geoff) moving
+from the left to the right of the image is just visible in the image
+(without touching the sides of the image).
+ <P>
+
+<LI> <B><A HREF="frame.04559.gif">Frame 4559</A></B>  <P>
+<img align=center alt="Key Frame 1" src="frame.04559.gif" width=240> 
+<P> The point when a bicycle moving from the left to the right of the
+image is just visible in the image (without touching the sides of the
+image).
+ <P>
+<LI> <B><A HREF="frame.14020.gif">Frame 14020</A></B>  <P>
+<img align=center alt="Key Frame 1" src="frame.14020.gif" width=240> 
+<P> The point when a red Parcel Force van moving from the right to the
+left of the image is just visible in the image (without touching the
+sides of the image).
+ <P>
+
+</OL>
+<H2><A NAME="data">The Data</A></H2>
+<H3>Blob data</H3>
+
+The data is stored in a gzip'ed ascii file <A HREF="car_blob1.gz"></A>.
+A section of the file describing frame 791 looks like ...
+<XMP>
+
+list_length = 2
+label 18
+origin (164.5,122.5)
+width 24
+height 24
+
+label 1
+origin (235.5,146.5)
+width 120
+height 64
+direction (0,-0.111111)
+**finished frame 791**
+
+</XMP>
+
+For each frame there is a list of blobs (each one potentially a car).
+The <TT>list_length = 2</TT> line specifies that there are 2 blobs
+in this frame. For each blob there is a set of tags given in the data 
+file as follows.
+
+<UL>
+<LI> <TT>label</TT>  : Each blob has a unique label. Some of the small blobs
+have been removed so the labels do not increment uniformly.
+
+<LI> <TT>origin</TT> : The origin of the minimum enclosing rectangle
+
+<LI> <TT>width</TT> : The width of the minimum enclosing rectangle
+
+<LI> <TT>height</TT> : The height of the minimum enclosing rectangle
+
+<LI> <TT>direction</TT> : (optional) 2D direction vector of the
+rectangle if available (otherwise blank line) 
+
+</UL>
+
+When an object is stationary for long enough, it becomes incorporated
+into the background so that new moving objects can be detected in front 
+of it. The background filter has an associated "time window" which determines
+how quickly stationary objects become part of the background. I have run the blob detection program with two different windows.
+
+<OL>
+<LI> <A HREF="car_blobs1.gz">data set 1</A> obtained using a window of 
+1200 frames (40 secs)
+
+<LI> <A HREF="car_blobs2.gz">data set 2</A> obtained using a window of
+400 frames (13 secs)
+
+</OL> <P>
+
+(You can download the data files using netscape "Save Link As" option
+from the right mouse button. Use <TT>gunzip</TT> to uncompress the data) <P>
+
+I think the second data set is more suitable for our purposes. 
+
+<H2><A NAME="example">Example of blob detection</A></H2>
+Here is an example frame for the blob detection process.
+Click to download the <A HREF="snap1.gif">differenced image</A> and the 
+<A HREF="snap2.gif">input image with regions</A>.
+<P>
+<img alt="(differenced image)" 
+src="snap1.gif" width=240>
+<img alt="(input image)" 
+src="snap2.gif" width=240>
+<P>
+
+<H2><A NAME="contact">Contacting Adam</A></H2>
+<UL>
+<LI><b>Electronic Mail: </b> <i> <a href="mailto:amb@comp.leeds.ac.uk">amb@comp.leeds.ac.uk</a></i>
+<LI><b>Office Phone: </b><i> 0113 233 6816</i>
+<LI><b>Fax: </b><i> 0113 233 5468</i>
+</UL>
+
+
+<HR>
+</HTML>
+
+
+

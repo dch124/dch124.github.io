@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>Intergrated Traffic and Pedestrian Vision System</title>
+</head>
+<body TEXT="#000000" BGCOLOR="#F1F8F1">
+<br>
+<center>
+<h1>An Integrated Traffic and Pedestrian Vision System</h1>
+</center>
+<P>
+<hr>
+<p>
+This page describe the Integrated Traffic and Pedestrian
+Model-Bassed Vision System, being developed at 
+Computer Vision Groups at 
+<a href="http://dream1.leeds.ac.uk/~vislib/welcome.html">Leeds</a> and 
+<a href="http://holly.rdg.ac.uk/">Reading</a> Universities
+as part of the EPSRC's IMV program (EPSRC Grant GR/K46620).
+</P>
+
+<p>
+The project combines two model bassed tracking systems:
+<OL>
+<LI>
+Using active shape models to track non-rigid objects, in this
+case people. (Leeds)
+<LI>Using geometric 3D models to track rigid
+objects: cars. (Reading)
+</ol>
+ These systems have been integrated to handle mutual occlusion.
+Recient work has focused on analysing the behaviour of people
+and annotating the interactions:
+<ul>
+<li>At Leeds we have developed a system
+which uses landmark point on trajectories to build a geometric representaion
+of a the path a person takes through a scene and also
+their interactions with vehicles. This representation allows us to 
+used supervised learning techniques to assues the likelyhood of a
+particular trajectory.
+<li>Reading has developed a system to produce natural language 
+descriptions of object interactions using basian belief nets.
+</ul>
+</P>
+
+<p>
+Heres what Don Braggins had to say about this project in the Oct 97
+issue of Image Processing Europe:
+<blockquote>
+Last Year I reviewd Daniel Crevier's book 'AI - the tumultuous history 
+of the search for artificial intelligence' in which he relates how
+in 1966 Marvin Minsky set a first year undergraduate, Gerald Sussman, the
+task of connecting a television camera to a computer and getting the
+machine to describe what it saw. He did not succeed, but a joint project between 
+Prof. David Hogg's group at Leeds University and Dr Tieniu Tan's at Reading
+(taking over the reins from the late Geoff Sullivan) comes close to achieving 
+that goal. They have been able to automatically annotate image sequences to
+say, for instance, that 'Predestrian <em>n</em> is now walking slowly
+in front of parked vehicle <em>m</em>' where <em>n</em> and <em>m</em>
+are simply the sequential numbers relating to appearance in the scene.
+Based on work in which David Hogg's group has done in finding algorithms to
+identify suspicious behaviour in car parks, it should not be long before 
+the annotation can be extended to say 'Predestrian <em>n</em> looks
+about to nick something out of vehicle <em>m</em> better have a human 
+look at the image on the monitor'.
+</blockquote>
+</p>
+<h2>Fitting models to cars and people</h2>
+<p>
+<A href="cool.gif">
+<img src="cool_sml.gif"></a>
+</p>
+<a href="viz_partA.mpg">
+MPEG movie of tracking results (8M)<br>
+<img src="mpeg.gif">
+</a>
+
+<h2>The Likelyhood of a particular trajectory</h2>
+<p>
+<img src="intropic.gif">
+</P>
+
+<P>
+<a href= "cutup.mpg">MPEG movie (2MB)</a> assessing the liklyhood of a particular tragectories. Dots above the heads indicate likelyhood of a particular
+trajectory.
+
+<P>
+<hr>
+<P>
+There are several other pages mainly ment for internal consumption,
+but you may find these of interest.
+
+<UL>
+<li> <a href="publications.html">Publications</a>
+<LI> <A HREF="car_data.html">Leeds output data site</A>
+<LI> <A HREF="leeds_results.html">Leeds tracking results</A>
+<LI><A HREF="http://www.cvg.cs.rdg.ac.uk/~imv">Reading output data site</A>
+<LI><A HREF="http://dream1.leeds.ac.uk/~amb/welcome.html#research"
+   >Learning flexible models for tracking human motion</A>
+      A M Baumberg
+<li><a href="http://www.scs.leeds.ac.uk/imv/publications.html">Neil Johnsons Research Page</a> Unsupervised learning techniques for learning object trajectories
+</UL>
+
+<hr>
+<Table>
+<TR>
+   <TD>
+	<a href="http://www.scs.leeds.ac.uk/vislib/welcome.html" LINKCOLOR="#000000">
+      <img alt="" src="http://www.scs.leeds.ac.uk/vislib/img/vg-lg-s.gif" ALIGN=LEFT></a>
+   </TD>
+   <TD>
+Web page created by Richard Morris
+<a href="mailto:rjm@scs.leeds.ac.uk">rjm@scs.leeds.ac.uk</a><br>
+28th Aug 1997
+   </TD>
+</TR>
+</TABLE>
+
+</body>
+</html>

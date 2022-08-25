@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>Expectation Maximisation (EM) made easy</title>
+</head>
+<body>
+<h1>Expectation Maximisation made easy</h1>
+
+The Expectation Maximisation (EM) algorithm is one of
+those useful things which is normally cloaked in
+a lot of statistical baggage. In fact its so easy to implement
+its unbelievable. Heres a few lines of maple code to
+illustrate:
+<p>
+<pre>
+with(stats);
+with(describe);
+with(statevalf);
+
+	/* These are the parameters for the distribution we want to fit to */
+	/* I.E the sum of two normals one with mean 7 the other with mean 15 */
+	/* sd1, sd2 are the standard deviation, wt1, wt2 are the relative weights */
+
+mu1 := 7; sd1 := 2; wt1 := 0.8; mu2:= 15; sd2:= 1; wt2 := 0.2;
+
+	/* Lets get some samples from the distribution,
+		500 * wt1 from one and 500 * wt2 from the other */
+
+r1 := random[normald[mu1,sd1]](400):
+r2 := random[normald[mu2,sd2]](100):
+
+	/* And make into a big list */
+
+r := array([r1,r2]):
+
+	/* Set up a few arrays */
+
+N:=500; p1 := array(1..N); p2 := array(1..N); p3 := array(1..N); p4 := array(1..N);
+
+	/* mu3, mu4 are our initial guesses */ 
+
+mu3 := 5; sd3 := 1; mu4 := 15; sd4 := 1; wt3 := 0.5; wt4 := 0.5;
+
+	/* Now the E step,
+		compute the contribution of i sample to each of the two
+		gaussians */
+
+for i from 1 to N do
+	p1[i] := wt3 * pdf[normald[mu3,sd3]](r[i]):
+	p2[i] := wt4 * pdf[normald[mu4,sd4]](r[i]):
+	p3[i] := p1[i] / ( p1[i] + p2[i] ):
+	p4[i] := p2[i] / ( p1[i] + p2[i] ):
+od;
+
+	/* So p3 and p4 are the probabilities that the i'th ele
+		has come from the first or second distro */
+
+	/* Now the M step: recalculate the means and standard deviations
+		for our guesses */
+
+	/* These are just simple weighted sums */
+
+w33 := sum(p3[k],k=1..N);
+w44 := sum(p4[k],k=1..N);
+wt3 := w33 / N;
+wt4 := w44 / N;
+
+	/* Here I disagree from my source which divided by N */
+
+mu3 := sum(p3[k]*r[k],k=1..N)/ w33;
+mu4 := sum(p4[k]*r[k],k=1..N)/ w44;
+sd3 := sqrt( sum(p3[k]*(r[k]-mu33)^2,k=1..N)/ w33 );
+sd4 := sqrt( sum(p4[k]*(r[k]-mu44)^2,k=1..N)/ w44 );
+
+	/* And thats it */
+	/* All you need to do now is repeat over and over till you get
+		a good convergence */
+</pre>
+
+The expresion of the EM algorithm I used came from
+'A Mixture Model for Representing Shape Variation'
+by T.F.Cootes and C.J.Taylor. Which appeared in BMVC'97.
+<P>
+I think the standard reference is 
+'Mixture Models: Inference and Application to Clustering'
+G.McLachlan and K.E.Basford. Published by Dekker, 1988.
+
+</body></head>
+

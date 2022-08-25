@@ -1,0 +1,136 @@
+<html>
+
+<!-- Page created by Adam Baumberg on Monday, September 02, 1996 -->
+
+<head><title>Results from Leeds People Tracker</title></head>
+
+<body bgcolor=#FFFF80 text=#000000 link=#FF0000 vlink=#7F007F>
+<basefont face="Times New Roman" size=3>
+
+<h1> Tracking results </h1>
+<I> Last modified Tue Oct 22 13:24:30 BST 1996</I>
+<menu>
+<li><img alt="new!" src="new.gif"><a href="#data_format"> Data file formats </a>
+<li><img alt="new!" src="new.gif"><a href="#the_data"> The data </a>
+<li><img alt="new!" src="new.gif"><a href="#mpegs"> Mpeg visualisations</a>
+<li><img alt="new!" src="new.gif"> <A HREF="http://dream1.leeds.ac.uk/~amb/ra_player/mpeg_player.html">
+Download the random access MPEG player (updated Tue Oct 22 13:24:30)</A>
+</menu>
+<hr>
+
+<h2><a name="data_format"> About the files </a></h2>
+
+The images are numbered using the Leeds frame numbering. (This was
+so that I could process the first 100 frames which would otherwise
+have a negative frame number !). To convert to Reading frame numbering simply subtract 176.
+<br>
+
+For each input image processed I have generated 2 gzip'ed files ...
+<ol>
+<li><h3>The camera view image</h3> e.g. <font face="Courier">02560.pgm.gz</font>  <br>
+<img align=center alt="Image 02560" src="example_view.gif" width=300>
+<p>
+This file is a (compressed) pgm image of the tracked objects 
+(people and cars)
+rendered onto the camera view plane. The image illustrates the relative depths used by the system for occlusion handling. Each object is rendered by a greylevel between 0 and 255. For each tracked person there
+is a reference number or label. The greylevel used to render a person is related to the reference number using ... 
+<blockquote>
+greylevel = 128 + (ref_no & 127) 
+</blockquote>
+Hence people will appear lighter than cars (with a greylevel &gt; 127).
+To view an image use <br> 'gunzip -c 00001.pgm.gz | xv -gamma 5 -'
+<p>
+<li><h3>The ascii data file</h3>
+e.g. <font face="Courier">02560.dat.gz</font><br>
+<A HREF="example_data.htm"> (click here to see example file contents)</A> <br>
+This file contains data for each tracked person in the image. Specifically, the file consists of a set of tags ...<br>
+<ul>
+<li> label n <br> 
+- the reference number for this tracked person
+<li> wp_pos (x<sub>w</sub>,y<sub>w</sub>) <br>
+- the world plane 
+coordinates of the person's feet
+<LI><img alt="new!" src="new.gif"> wp_cov xx xy yy <br>
+- the covariance matrix elements of the estimated world plane
+coordinates
+<li> image_origin (x<sub>i</sub>,y<sub>i</sub>) <br>
+- the image plane
+coordinates of the silhouette origin
+<li> image_width w
+<li> image_height h
+<li> control_points (x<sub>0</sub>,y<sub>0</sub>) (x<sub>1</sub>,y<sub>1</sub>) ... (x<sub>39</sub>,y<sub>39</sub>) <br>
+- the image plane coordinates of the spline control points that represent the silhouette shape
+</ul>
+
+</ol>
+
+<hr>
+
+<h2><a name="mpegs"> MPEG visualisations</a></h2> I have also
+generated several MPEG files visualising the tracking results. The
+sequences are quite long and may be slow to play.  There are also some
+quite boring sections in which little happens.  Hence, I have extended
+the standard unix "mpeg_play" program to allow random access to image
+frames. This allows you to play fast or jump to an interesting part of
+the sequence. <br>
+<A HREF="http://dream1.leeds.ac.uk/~amb/ra_player/mpeg_player.html"> 
+More details here. </A> You can download the MPEG files and view with the 
+extended player.
+
+
+<ol>
+<li> <img alt="new!" src="new.gif">
+<a href="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/viz_partA.mpg">
+Results of part A (frames 0001 - 3999)</a> (9Meg) - <br>
+
+<LI> <img alt="new!" src="new.gif">
+<a href="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/viz_partB.mpg">
+Results of part B (frames 7500 - 14999)</a> (15Meg) - <br>
+
+<UL>
+
+The MPEG's contain a split screen view of ...
+
+<LI> The camera view images of the tracked people and cars. The images
+have been mapped into colour for visualisation purposes.
+
+<LI> The outlines of all tracked people superimposed on the raw
+images. Each spline is rendered ignoring any known or unknown
+occlusions.
+
+</UL>
+</ol>
+
+<hr>
+
+<a name="the_data"><h2> The data</h2></a>
+
+<h3>Part A (Leeds frame numbers 00001 - 03999) </h3>
+<ul>
+<li> <a href="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partA_images.tar">
+tar file containing gzip'ed camera view images</a>
+<li> <a href="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partA_data.tar">
+tar file containing gzip'ed ascii data (ground plane origin etc for each tracked person)</a>
+</ul>
+
+<h3> Part B (Leeds frame numbers 7500 - 14999) <img alt="new!" src="new.gif"> </h3>
+<UL>
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_7500_to_8999_images.tar"> images (frames 7500 to 8999)</A>
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_7500_to_8999_data.tar"> ground plane data (frames 7500 to 8999)</A>
+
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_9000_to_10999_images.tar"> images (frames 9000 to 10999)</A>
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_9000_to_10999_data.tar"> ground plane data (frames 9000 to 10999)</A>
+
+
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_11000_to_12999_images.tar"> images (frames 11000 to 12999)</A>
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_11000_to_12999_data.tar"> ground plane data (frames 11000 to 12999)</A>
+
+
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_13000_to_14999_images.tar"> images (frames 13000 to 14999)</A>
+<LI> <A HREF="ftp://ftp.comp.leeds.ac.uk/scs/people/amb/LEEDS_OUT/partB_13000_to_14999_data.tar"> ground plane data (frames 13000 to 14999)</A>
+
+</UL>
+
+</body>
+
+</html>
