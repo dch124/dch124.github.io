@@ -1,0 +1,120 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <title>Computer Vision - University of Leeds - Carried Object Detection and Tracking using Geometric Shape Models and Spatio-Temporal Consistency</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="keywords" content="Carried Object,Object Detection,Object Tracking,Spatio-Temporal Consistency">
+  <link rel="stylesheet" href="http://www.comp.leeds.ac.uk/vision/simple.css"> 
+</head>
+
+<body style="margin-left: 4em; margin-right: 4em; margin-top: 3em">
+
+<div style="text-align: left">
+
+<center><h1>Carried Object Detection using a Generic Shape Model and Positional Consistency</center>
+
+<h3 style="font-size: 80%; text-align: left;">
+<a href="http://www.comp.leeds.ac.uk/fy06at/">Aryana Tavanai</a>, <a href="http://www.comp.leeds.ac.uk/scms/">Muralikrishna Sridhar</a>, <a href="http://www.scs.leeds.ac.uk/scsfg/">Feng Gu</a>, <a href="http://www.comp.leeds.ac.uk/agc">Anthony G. Cohn</a> and <a href="http://www.comp.leeds.ac.uk/dch">David C. Hogg</a></h3>
+
+<!--
+<div style="text-align: justify;">
+This work applies a top-down bottom-up approach between object detection and tracking and event recognition with the following features:
+<ul>
+  <li>Within an <b>optimization procedure</b>, tracks influence the events in the <b>bottom-up</b> approach and vice versa in the <b>top-down</b> approach.</li>
+  <li>Bottom-up and top-down is performed in a <b>cyclic manner</b>.</li>
+  <li>The top level models the <b>person-object relationship</b> that is characteristic of the <b>carry event</b>.</li>
+  <li>To detect a <b>generic class</b> of carried objects, we propose the use of <b>geometric shape models</b>.</li>
+  <li>Object detections provide <b>closed countours</b> on the object based on edges in the image.</li>
+</ul> 
+-->
+
+This work applies <b>local</b> and <b>global</b> constraints in an optimisation procedure where the interpretation of the <b>tracks</b> (local constraints) and <b>events</b> (global constraints) <b>mutually influence</b> each other. <br>
+
+
+<div style="text-align: justify;">
+<ul>
+<li> We build a model in terms of the <b>person-object relationship</b> over time which focuses on the <b>carry event</b>.
+<li> <b>Closed contours</b> which are approximately <b>convex</b> are detected as potential carried objects and form a set of initial object detections.
+<li> A <b>high level interpretation</b> of which objects are carried when and by whom is computed from high confidence object detections.
+<li> The current high level interpretation induces a set of <b>object tracks</b>.
+<li> <b>Confidence estimates</b> on object detections are changed based on the current object tracks.
+<li> The high level interpretation from above is repeated until <b>convergence</b>.
+</ul> 
+</div>
+
+<br>
+<div><center>
+   <table>
+      <tr>
+	<td>
+	  <img style="border: 0" src="Countour_of_carried_object_detections.png" height="300">
+	</td>
+	<td>
+	  <img style="border: 0" src="Carried_object_tracks.gif" height="300">
+	</td>
+
+      </tr>
+  </table>
+
+  </center>
+</div>
+
+<br>
+
+
+
+<h2>Software Download</h2>
+
+Geometric carried object detection code will be available soon. (Please contact <a href="http://www.comp.leeds.ac.uk/fy06at/">Aryana Tavanai</a> for any queries)<!--is available in MATLAB - <a href="GeometricCarriedObjectDetector.zip">download (3.0MB)</a>--><br>
+
+Tracking and optimisation code will be available in the near future. <br>
+
+
+
+
+<h2>Publications</h2>
+
+<table>
+  <tr>
+    <td>
+    Aryana Tavanai, Muralikrishna Sridhar, Feng Gu, Anthony G. Cohn, and David C. Hogg. <b>Carried Object Detection and Tracking using Geometric Shape Models and Spatio-Temporal Consistency</b>. <i>9th International Conference on Computer Vision Systems, ICVS 2013</i>. (To appear)
+    </td>
+    <td>
+    <a href="CarriedObjectDetectionTrackingICVS2013.pdf"><img style="border: 0" src="ICVS2013.png" height="80"></a><br><center>[pdf]</center>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+<h2>Datasets</h2>
+The following two datasets have been used to evaluate the proposed approach.
+<p>
+<a href="http://www.visint.org/datasets">MINDSEYE2012</a>: A subset of Mind's Eye Year 2 videos were selected. 
+</p>
+
+<p>
+<a href="http://www.cvg.rdg.ac.uk/PETS2006/data.html">PETS2006</a>: All seven videos of the third camera were chosen from the PETS2006 dataset.
+</p>
+
+<p>
+
+<!--<b>NOTE</b>: A new and larger subset of the MINDSEYE2012 dataset is available from HERE. This subset contains many more videos compared to the selection above where the scenes contain a larger variety of objects and activities.-->
+
+
+
+
+<h2>Acknowledgement</h2>
+The financial support of the EU Framework 7 project Co-RACE (FP7-ICT- 287752), and the DARPA Mind's Eye program (project VIGIL, W911NF-10-C-0083) is gratefully acknowledged.
+</div>
+
+</div>
+
+<div style="text-align:right; font-size:80%; color: gray;">Last Updated 2/7/2013</div>
+
+</body></html>
