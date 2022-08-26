@@ -1,2 +1,2 @@
 # dch124.github.io
-Legacy webpages
+Legacy webpages of the Computer Vision Group at the University of Leeds.
