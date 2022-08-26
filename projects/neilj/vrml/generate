@@ -1,0 +1,8 @@
+#!/bin/csh -f
+
+cd /usr/tmp
+cp /home/cself/neilj/netwatch/data/current/beta_predict.txt.gz .
+gunzip beta_predict.txt.gz
+VRMLGenerate -n 100 -s 1000 -p ~/netwatch/data/current/params -f beta_predict.txt > /home/cself/neilj/WWW/anim/anim.wrl
+chmod 644 /home/cself/neilj/WWW/anim/anim.wrl
+rm beta_predict.txt

@@ -1,0 +1,106 @@
+#VRML V2.0 utf8
+
+# Prototype animation character node ...
+
+PROTO Reptar [
+  exposedField SFVec3f size 1.6 1.6 1.6
+  exposedField SFVec3f posn 0 0 0
+]
+{
+  Transform {
+    translation IS posn
+    scale IS size
+    children [
+      Transform {
+        translation 0 0.45 0
+        children [
+          Shape {
+            appearance DEF Marble Appearance {
+              material Material {
+                diffuseColor 0 0.5 0
+                ambientIntensity 0.5
+                specularColor 1 1 1
+                shininess 1.0
+              }
+              texture ImageTexture {
+                url "marble.png"
+              }
+            }
+            geometry Cone{
+              bottomRadius 0.3
+              height 0.9
+              side TRUE
+              bottom TRUE
+            }
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.8 0
+        children [
+          Shape {
+            appearance USE Marble
+            geometry Sphere{
+              radius 0.2
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+# Prototype behaviour animator node ...
+#
+# External TimeSensor fraction_changed events must be routed to
+# set_fraction, thus causing Posn value_changed and Trigger visible events
+# which are routed to Object set_posn and Visibility set_whichChoice
+# respectively.
+
+PROTO Behaviour [
+  field MFFloat key []
+  field MFVec3f keyValue []
+  field SFVec3f size 1.6 1.6 1.6
+  eventIn SFFloat set_fraction
+]
+{
+  DEF Visibility Switch {
+    whichChoice -1
+    choice [
+      DEF Object Reptar {
+        size IS size
+      }
+    ]
+  }
+  DEF Posn PositionInterpolator {
+    set_fraction IS set_fraction
+    key IS key
+    keyValue IS keyValue
+  }
+  DEF Trigger Script {
+    field MFFloat key IS key
+    field MFVec3f keyValue IS keyValue
+    eventIn SFFloat trigger IS set_fraction
+    eventOut SFInt32 visible
+    url [
+      "javascript:
+         function trigger(fraction) {
+           if ((fraction >= key[0]) && (fraction <= key[key.length - 1]))
+             visible = 0;
+           else
+             visible = -1;
+         }
+      ",
+      "vrmlscript:
+         function trigger(fraction) {
+           if ((fraction >= key[0]) && (fraction <= key[key.length - 1]))
+             visible = 0;
+           else
+             visible = -1;
+         }
+      "
+    ]
+  }
+  ROUTE Posn.value_changed TO Object.set_posn
+  ROUTE Trigger.visible TO Visibility.set_whichChoice
+}

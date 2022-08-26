@@ -1,0 +1,35 @@
+#VRML V2.0 utf8
+
+# Define scene ...
+
+Collision {
+  children [
+    Shape {
+      appearance Appearance {
+        texture ImageTexture {
+          url "kids_scene.jpg"
+        }
+      }
+      geometry IndexedFaceSet {
+        coord Coordinate {
+          point [
+            -0.9270721486 0 1.511267761,
+            1.464074722 0 1.098230489,
+            5.722521322 0 -17.03548771,
+            -8.157121565 0 -12.87126333
+          ]
+        }
+        coordIndex [ 0, 1, 2, 3, -1 ]
+        texCoord TextureCoordinate {
+          point [
+            0.52227089 0.025063192,
+            0.68717757 0.04624459,
+            0.98086354 0.97617886,
+            0.023646789 0.76262889
+          ]
+        }
+      }
+    }
+  ]
+  collide FALSE
+}

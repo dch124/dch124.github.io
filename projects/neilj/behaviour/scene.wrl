@@ -1,0 +1,77 @@
+#VRML V2.0 utf8
+
+NavigationInfo {
+  headlight FALSE
+}
+
+# Define viewpoint ...
+
+Transform {
+  translation 4 70 -18
+  rotation 1 0 0 -1.5707963
+  children [ Viewpoint {} ]
+}
+
+# Define lighting ...
+
+PointLight {
+  ambientIntensity 0.5
+  location 0 10 0
+}
+
+# Define scene ...
+
+Collision {
+  children [
+    Shape {
+      appearance Appearance {
+        texture ImageTexture {
+          url "scene.jpg"
+        }
+      }
+      geometry IndexedFaceSet {
+        coord Coordinate {
+          point [
+            2.48674419445366 0 11.1119006811412,
+            11.0037357668113 0 8.83222570356022,
+            14.1266868002686 0 -48.1800223182675,
+            -18.2959591500681 0 -41.3561315459253
+          ]
+        }
+        coordIndex [ 0, 1, 2, 3, -1 ]
+        texCoord TextureCoordinate {
+          point [
+            0.63198119 0.014749263,
+            0.88246282 0.051930726,
+            0.97431432 0.98655774,
+            0.02070784 0.87469068
+          ]
+        }
+      }
+    }
+    DEF Ground TouchSensor {}
+  ]
+  collide FALSE
+}
+
+# Declare animation node ...
+
+EXTERNPROTO Animation [
+  eventIn SFTime startTime
+  exposedField SFVec3f center
+  exposedField SFRotation rotation
+  exposedField SFVec3f scale
+  exposedField SFRotation scaleOrientation
+  exposedField SFVec3f translation
+]
+"anim.wrl#Animation"
+
+# Include animation and route trigger ...
+
+Collision {
+  children [
+    DEF Anim Animation { }
+  ]
+  collide FALSE
+}
+ROUTE Ground.touchTime TO Anim.startTime

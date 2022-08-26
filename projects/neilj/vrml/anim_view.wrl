@@ -1,0 +1,133 @@
+#VRML V2.0 utf8
+
+# Prototype view animator node
+#
+# External Viewpoints must be used for view1 and view2, thus allowing their
+# positions and orientations to be used. External TouchSensor touchTime events
+# must be routed to touched1 and touched2, thus allowing the destination
+# Viewpoint to be selected and the animation triggered. The bind1 and bind2
+# events must be routed back to the external Viewpoints, thus allowing the
+# Viewpoints to be bound at the end of the animation.
+
+PROTO AnimViews [
+  field SFTime interval 10
+  field SFNode view1 Viewpoint { }
+  field SFNode view2 Viewpoint { }
+  eventIn SFTime touched1
+  eventIn SFTime touched2
+  eventOut SFBool bind1
+  eventOut SFBool bind2
+]
+{
+  Group {
+    children [
+      DEF Prox ProximitySensor {
+        size 1000000 1000000 1000000
+      }
+      DEF AnimView Viewpoint { }
+    ]
+  }
+  DEF Timer TimeSensor {
+    cycleInterval IS interval
+  }
+  DEF PosInterp PositionInterpolator {
+    key [ 0, 1 ]
+    keyValue [ 0 0 0, 0 0 0 ]
+  }
+  DEF OriInterp OrientationInterpolator {
+    key [ 0, 1 ]
+    keyValue [ 0 0 0 0, 0 0 0 0 ]
+  }
+  DEF BindViews Script {
+    field SFInt32 nextView 0
+    field MFVec3f posKey [ 0 0 0, 0 0 0 ]
+    field MFRotation oriKey [ 0 0 0 0, 0 0 0 0 ]
+    field SFNode view1 IS view1
+    field SFNode view2 IS view2
+    field SFTime interval IS interval
+    eventIn SFVec3f set_position
+    eventIn SFRotation set_orientation
+    eventIn SFTime touched1 IS touched1
+    eventIn SFTime touched2 IS touched2
+    eventIn SFBool deactivate
+    eventOut MFVec3f posKeyValue
+    eventOut MFRotation oriKeyValue
+    eventOut SFBool bind
+    eventOut SFTime startTime
+    eventOut SFTime stopTime
+    eventOut SFBool bind1 IS bind1
+    eventOut SFBool bind2 IS bind2
+    url [
+      "javascript:
+        function set_position(pos) {posKey[0] = pos;}
+        function set_orientation(ori) {oriKey[0] = ori;}
+        function activate(time) {
+          posKeyValue = posKey;
+          oriKeyValue = oriKey;
+          bind = TRUE;
+          stopTime = time;
+          startTime = time;
+        }
+        function touched1(time) {
+          posKey[1] = view1.position;
+          oriKey[1] = view1.orientation;
+          nextView = 1;
+          activate(time);
+        }
+        function touched2(time) {
+          posKey[1] = view2.position;
+          oriKey[1] = view2.orientation;
+          nextView = 2;
+          activate(time);
+        }
+        function deactivate(state) {
+          if (state == FALSE) {
+            if (nextView == 1) bind1 = TRUE;
+            else if (nextView == 2) bind2 = TRUE;
+          }
+        }
+      ",
+      "vrmlscript:
+        function set_position(pos) {posKey[0] = pos;}
+        function set_orientation(ori) {oriKey[0] = ori;}
+        function activate(time) {
+          posKeyValue = posKey;
+          oriKeyValue = oriKey;
+          bind = TRUE;
+          stopTime = time;
+          startTime = time;
+        }
+        function touched1(time) {
+          posKey[1] = view1.position;
+          oriKey[1] = view1.orientation;
+          nextView = 1;
+          activate(time);
+        }
+        function touched2(time) {
+          posKey[1] = view2.position;
+          oriKey[1] = view2.orientation;
+          nextView = 2;
+          activate(time);
+        }
+        function deactivate(state) {
+          if (state == FALSE) {
+            if (nextView == 1) bind1 = TRUE;
+            else if (nextView == 2) bind2 = TRUE;
+          }
+        }
+      "
+    ]
+  }
+  ROUTE Prox.position_changed TO BindViews.set_position
+  ROUTE Prox.orientation_changed TO BindViews.set_orientation
+  ROUTE BindViews.posKeyValue TO PosInterp.keyValue
+  ROUTE BindViews.oriKeyValue TO OriInterp.keyValue
+  ROUTE BindViews.bind TO AnimView.set_bind
+  ROUTE BindViews.startTime TO Timer.startTime
+  ROUTE BindViews.stopTime TO Timer.stopTime
+  ROUTE Timer.isActive TO BindViews.deactivate
+  ROUTE Timer.fraction_changed TO PosInterp.set_fraction
+  ROUTE Timer.fraction_changed TO OriInterp.set_fraction
+  ROUTE PosInterp.value_changed TO AnimView.position
+  ROUTE OriInterp.value_changed TO AnimView.orientation
+}

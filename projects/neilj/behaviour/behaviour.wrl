@@ -1,0 +1,130 @@
+#VRML V2.0 utf8
+
+# Prototype animation character node ...
+
+PROTO Arrow [
+  exposedField SFVec3f posn 0 0 0
+  exposedField SFRotation orntn 0 -1 0 0
+  field SFFloat size 0.5
+  eventIn SFFloat set_size
+]
+{
+  DEF Trans Transform {
+    rotation IS orntn
+    translation IS posn
+    children [
+      Transform {
+        rotation 0 0 1 -1.5707963
+        translation 0.5 0.5 0
+        children [
+          Shape {
+            appearance DEF Green Appearance {
+              material Material {
+                diffuseColor 0 0.5 0
+                ambientIntensity 0.5
+                specularColor 1 1 1
+                shininess 1.0
+              }
+            }
+            geometry Cone{
+              bottomRadius 0.5
+              height 1.0
+            }
+          }
+        ]
+      }
+      Transform {
+        rotation 0 0 1 -1.5707963
+        translation -0.5 0.5 0
+        children [
+          Shape {
+            appearance USE Green
+            geometry Cylinder{
+              height 1.0
+              radius 0.25
+            }
+          }
+        ]
+      }
+    ]
+  }
+  DEF Size Script {
+    field SFFloat size IS size
+    eventIn SFFloat set_size IS set_size
+    eventOut SFVec3f scale_changed
+    url [
+      "javascript: 
+        function set() {scale_changed = new SFVec3f(size, size, size);}
+        function initialize() {set();}
+        function set_size(value) {size=value; set();}
+      ",
+      "vrmlscript:
+        function set() {scale_changed = new SFVec3f(size, size, size);}
+        function initialize() {set();}
+        function set_size(value) {size=value; set();}
+      "
+    ]
+  }
+  ROUTE Size.scale_changed TO Trans.set_scale
+}
+
+# Prototype arrow behaviour animator node ...
+#
+# External TimeSensor fraction_changed events must be routed to set_fraction,
+# thus causing Posn and Orntn value_changed, and Trigger visible, events which
+# are routed to Object set_posn and set_orntn, and Visibility set_whichChoice,
+# respectively.
+
+PROTO Behaviour [
+  field MFFloat key []
+  field MFVec3f keyValuePosn []
+  field MFRotation keyValueOrntn []
+  field SFFloat size 0.5
+  eventIn SFFloat set_fraction
+]
+{
+  DEF Visibility Switch {
+    whichChoice -1
+    choice [
+      DEF Object Arrow {
+        size IS size
+      }
+    ]
+  }
+  DEF Posn PositionInterpolator {
+    set_fraction IS set_fraction
+    key IS key
+    keyValue IS keyValuePosn
+  }
+  DEF Orntn OrientationInterpolator {
+    set_fraction IS set_fraction
+    key IS key
+    keyValue IS keyValueOrntn
+  }
+  DEF Trigger Script {
+    field MFFloat key IS key
+    eventIn SFFloat trigger IS set_fraction
+    eventOut SFInt32 visible
+    url [
+      "javascript:
+         function trigger(fraction) {
+           if ((fraction >= key[0]) && (fraction <= key[key.length - 1]))
+             visible = 0;
+           else
+             visible = -1;
+         }
+      ",
+      "vrmlscript:
+         function trigger(fraction) {
+           if ((fraction >= key[0]) && (fraction <= key[key.length - 1]))
+             visible = 0;
+           else
+             visible = -1;
+         }
+      "
+    ]
+  }
+  ROUTE Posn.value_changed TO Object.set_posn
+  ROUTE Orntn.value_changed TO Object.set_orntn
+  ROUTE Trigger.visible TO Visibility.set_whichChoice
+}
